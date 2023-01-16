@@ -1,0 +1,51 @@
+<% if @transport_mode.errors.any? %>
+<div id="errors" class="alert alert-danger" role="alert">
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+        <% @transport_mode.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<hr />
+
+
+<div class="row mx-0">
+    <div class="col-xs-12 col-md-6">
+        <%= form_with model: @transport_mode do |tm| %>
+
+        <div class="form_field col-sm-12 pb-3">
+            <%= tm.label :name, class: "form-label" %>
+            <%= tm.text_field :name, class: "form-control" %>
+        </div>
+        <div class="form_field col-sm-12 col-md-6 pb-3">
+            <%= tm.label :min_range, class: "form-label" %>
+            <%= tm.text_field :min_range, class: "form-control" %>
+        </div>
+        <div class="form_field col-sm-12 col-md-6 pb-3">
+            <%= tm.label :max_range, class: "form-label" %>
+            <%= tm.text_field :max_range, class: "form-control" %>
+        </div>
+        <div class="form_field col-sm-12 col-md-6 pb-3">
+            <%= tm.label :min_weight, class: "form-label" %>
+            <%= tm.text_field :min_weight, class: "form-control" %>
+        </div>
+        <div class="form_field col-sm-12 col-md-6 pb-3">
+            <%= tm.label :max_weight, class: "form-label" %>
+            <%= tm.text_field :max_weight, class: "form-control" %>
+        </div>
+        <div class="form_field col-sm-12 col-md-6 pb-3">
+            <%= tm.label :tax, class: "form-label" %>
+            <%= tm.text_field :tax, class: "form-control" %>
+        </div>
+
+        <div class="col-sm-12 col-md-12 pb-3">
+            <%= tm.submit "Salvar", class: "btn btn-primary btn-lg" %>
+            <%= link_to 'Voltar', transport_modes_path, class: "btn btn-default btn-lg" %>
+        </div>
+    
+        <% end %>
+    </div>
+</div>

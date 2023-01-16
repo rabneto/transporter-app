@@ -4,6 +4,8 @@ describe 'usuário vê tela inicial' do
   it 'com sucesso' do
     visit root_path
 
-    expect(page).to have_content 'Bem vindos'
+    within('header') do
+      expect(page).to have_content 'Transporter APP'
+    end
   end
 end

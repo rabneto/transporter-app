@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      transport_mode: "Modalidades de Transporte"
+    attributes:
+      transport_mode:
+        name: 'Nome'
+        min_range: 'Distância Mínima'
+        max_range: 'Distância Máxima'
+        min_weight: 'Peso Mínimo'
+        max_weight: 'Peso Máximo'
+        tax: 'Taxa Fixa'
+        active: 'Ativo?'

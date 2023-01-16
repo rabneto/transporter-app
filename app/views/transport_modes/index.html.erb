@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-'12 col-md-8">
+      <h3>Modalidades de Transporte</h3>
+    </div>
+    <div class="col-xs-'12 col-md-4 text-right">
+      <%= link_to 'Cadastrar Nova', new_transport_mode_path, class: 'btn btn-default' %>
+    </div>
+  </div>
+
+  <% if @transport_modes.any? %>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Alcance</th>
+        <th scope="col">Peso</th>
+        <th scope="col">Taxa</th>
+        <th scope="col">Ativo?</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @transport_modes.each do | tm | %>
+      <tr>
+        <td><%= link_to tm.name, tm %></td>
+        <td><%= tm.min_range %> / <%= tm.max_range %></td>
+        <td><%= tm.min_weight %>g / <%= tm.max_weight %>g</td>
+        <td>R$ <%= tm.tax %></td>
+        <td>
+          <% if tm.active == 'enable' %>  
+            <span>&#9745;</span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <% else %>
+    <hr />
+    <h3>Nenhuma modalidade cadastrada</h3>
+  <% end %>
+
+</div>
