@@ -8,11 +8,11 @@ Essas instruções permitirão que você obtenha uma cópia do projeto em opera�
 
 ### 📋 Versões de desenvolvimento
 
-Ruby ruby 3.1.2p20
-Rails 7.0.4
-banco Sqlite
-rspec
-capybara
+* Ruby 3.1.2p20
+* Rails 7.0.4
+* banco Sqlite
+* rspec
+* capybara
 
 ## ⚙️ Executando os testes
 
