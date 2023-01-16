@@ -24,7 +24,53 @@ describe 'usuário vêm detalhes do modelo de transporte' do
 
   end
 
-  it 'e retrorna' do
+  it 'e desativa uma modalidade de transporte' do
+
+    TransportMode.create!(name: 'Rodoviário',
+                          min_range: 100,
+                          max_range: 300,
+                          min_weight: 50,
+                          max_weight: 500,
+                          tax: 200)
+
+    visit root_path
+    within('#sidebar') do
+      click_on 'Modalidades de Transporte'
+    end
+    click_on 'Rodoviário'
+
+    click_on 'Desabilitar'
+
+    expect(page).to have_field 'Ativo?', with: 'Desabilitado'
+
+  end
+
+  it 'e reativa uma modalidade de transporte' do
+
+    TransportMode.create!(name: 'Rodoviário',
+                          min_range: 100,
+                          max_range: 300,
+                          min_weight: 50,
+                          max_weight: 500,
+                          tax: 200)
+
+    visit root_path
+    within('#sidebar') do
+      click_on 'Modalidades de Transporte'
+    end
+    click_on 'Rodoviário'
+
+    click_on 'Desabilitar'
+
+    expect(page).to have_field 'Ativo?', with: 'Desabilitado'
+
+    click_on 'Habilitar'
+
+    expect(page).to have_field 'Ativo?', with: 'Habilitado'
+
+  end
+
+  it 'e retorna' do
 
     TransportMode.create!(name: 'Rodoviário',
                           min_range: 100,
