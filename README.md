@@ -1,24 +1,19 @@
-# README
+# Transporter APP
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Aplicação desenvolvida em Ruby on Rails, para administração de transportadoras
 
-Things you may want to cover:
+## 🚀 Começando
 
-* Ruby version
+Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
 
-* System dependencies
+### 📋 Versões de desenvolvimento
 
-* Configuration
+Ruby ruby 3.1.2p20
+Rails 7.0.4
+banco Sqlite
+rspec
+capybara
 
-* Database creation
+## ⚙️ Executando os testes
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+executar o comando `rails generate rspec:install` após o bundle inicial e `rspec`para rodar os testes
