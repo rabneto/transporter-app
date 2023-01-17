@@ -1,0 +1,43 @@
+<h3 class="mb-3">Editar Categoria</h3>
+
+<% if @category.errors.any? %>
+<div id="errors" class="alert alert-danger" role="alert">
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+        <% @category.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<hr />
+
+
+<div class="row mx-0">
+    <div class="col-xs-12 col-md-6">
+        <%= form_with model: @category do |c| %>
+
+        <div class="form_field col-sm-12 pb-3">
+            <%= c.label :name, class: "form-label" %>
+            <%= c.text_field :name, class: "form-control" %>
+        </div>
+        
+        <div class="col-sm-12 col-md-8 pb-3">
+            <%= c.submit "Salvar", class: "btn btn-primary btn-lg" %>
+            <%= link_to 'Voltar', categories_path, class: "btn btn-default btn-lg" %>
+        </div>
+
+        <% end %>
+
+        <div class="col-sm-12 col-md-4 pb-3 text-right">
+            <% if @category.enable? %>
+                <%= button_to "Desativar", desactive_category_path, { method: 'patch', class: "btn btn-default btn-lg" } %>
+            <% else %>
+                <%= button_to "Ativar", active_category_path, { method: 'patch', class: "btn btn-default btn-lg" } %>
+            <% end %>
+        </div>
+    
+        
+    </div>
+</div>

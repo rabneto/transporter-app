@@ -2,6 +2,7 @@ pt-BR:
   activerecord:
     models:
       transport_mode: "Modalidades de Transporte"
+      category: "Categorias"
     attributes:
       transport_mode:
         name: 'Nome'
@@ -11,3 +12,6 @@ pt-BR:
         max_weight: 'Peso Máximo'
         tax: 'Taxa Fixa'
         active: 'Ativo?'
+      category:
+        name: "Nome"
+        status: "Ativo?"
