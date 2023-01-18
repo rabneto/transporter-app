@@ -2,6 +2,10 @@ require 'rails_helper'
 
 describe 'usuário editar uma modalidade de transporte' do
   it 'a partir da página de detalhes' do
+
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
+
     tm = TransportMode.create!(name: 'Rodoviário',
                                min_range: 100,
                                max_range: 300,
@@ -26,6 +30,10 @@ describe 'usuário editar uma modalidade de transporte' do
   end
 
   it 'com sucesso' do
+
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
+
     tm = TransportMode.create!(name: 'Rodoviário',
                                min_range: 100,
                                max_range: 300,
@@ -61,6 +69,10 @@ describe 'usuário editar uma modalidade de transporte' do
   end
 
   it 'e mantêm os campos obrigatórios' do
+
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
+    
     tm = TransportMode.create!(name: 'Rodoviário',
                                min_range: 100,
                                max_range: 300,

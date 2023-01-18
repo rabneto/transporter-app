@@ -1,7 +1,11 @@
 require 'rails_helper'
 
-describe 'usuário vê modalidades de transporte' do
+describe 'usuário vê categorias' do
   it 'a partir do menu' do
+
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
+
     visit root_path
     within('#sidebar') do
       click_on 'Categorias'
@@ -10,6 +14,10 @@ describe 'usuário vê modalidades de transporte' do
   end
 
   it 'com sucesso' do
+
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
+
     Category.create!(name: 'Moto')
 
     Category.create!(name: 'Bicicleta')
@@ -25,6 +33,9 @@ describe 'usuário vê modalidades de transporte' do
   end
 
   it 'e não existem categorias cadastradas' do
+
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
 
     visit root_path
     within('#sidebar') do

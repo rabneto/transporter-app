@@ -1,0 +1,58 @@
+<h2>Editar Usuário<%#= resource_name.to_s.humanize %></h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="form-group first mb-4">
+    <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: 'Nome', class: 'form-control' %>
+  </div>
+
+  <div class="form-group first mb-4">
+    <%= f.email_field :email, autocomplete: "email", placeholder: 'E-mail', class: 'form-control' %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="col-12">
+    <%= f.label :password %>
+  </div>
+
+  <div class="form-group first mb-4">
+    <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
+    <% if @minimum_password_length %>
+    <% end %>
+  </div>
+
+  <div class="col-12">
+    <%= f.label :password_confirmation %>
+  </div>
+
+  <div class="form-group first mb-4">
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+  </div>
+
+  <div class="col-12">
+    <%= f.label :current_password %>
+  </div>
+
+  <div class="form-group first mb-4">
+    <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control' %>
+  </div>
+
+  <div class="col-12">
+    <em><%= @minimum_password_length %> caracteres, no mínimo</em><br />
+    <em>deixe em branco se não quiser alterar a senha atual</em>
+  </div>
+
+  <div class="actions mb-4">
+    <%= f.submit "Atualizar", class: "btn btn-block btn-primary" %>
+  </div>
+<% end %>
+
+<h3>Cancelar Conta</h3>
+
+<p class="mb-4">Quer cancelar sua conta? <%= button_to "Cancelar minha conta", registration_path(resource_name), data: { confirm: "Are you sure?" }, class: "btn btn-block btn-danger", method: :delete %></p>
+
+<%= link_to "Voltar", :back %>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <title>Transporter App</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application" %>
+  </head>
+<body>
+  <% flash.each do |type, msg| %>
+      <% if type == 'notice' %>
+        <div id="notice" class="alert alert-success" role="alert"><%= msg %></div>
+      <% end %>
+      <% if type == 'alert' %>
+        <div id="alert" class="alert alert-danger" role="alert"><%= msg %></div>
+      <% end %>
+  <% end %>
+  <div class="content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <%= image_tag "img-login.jpg", class: "img-responsive" %>
+        </div>
+        <div class="col-md-6 contents">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

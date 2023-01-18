@@ -2,6 +2,10 @@ require 'rails_helper'
 
 describe 'usuário edita uma categoria' do
   it 'a partir da home' do
+
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
+
     c = Category.create!(name: 'Bicicleta')
 
     visit root_path
@@ -15,6 +19,10 @@ describe 'usuário edita uma categoria' do
   end
 
   it 'com sucesso' do
+
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
+
     c = Category.create!(name: 'Bicicleta')
 
     visit root_path
@@ -34,6 +42,10 @@ describe 'usuário edita uma categoria' do
   end
 
   it 'e mantêm os campos obrigatórios' do
+
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
+
     c = Category.create!(name: 'Bicicleta')
 
     visit root_path
@@ -56,6 +68,9 @@ describe 'usuário edita uma categoria' do
 
   it 'e desativa' do
 
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
+
     c = Category.create!(name: 'Bicicleta')
 
     visit root_path
@@ -64,13 +79,16 @@ describe 'usuário edita uma categoria' do
     end
     click_on 'Bicicleta'
 
-    click_on 'Desabilitar'
+    click_on 'Desativar'
 
-    expect(page).to have_selector(:link_or_button, 'Habilitar')
+    expect(page).to have_selector(:link_or_button, 'Ativar')
   end
 
   it 'e reativa' do
 
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
+
     c = Category.create!(name: 'Bicicleta')
 
     visit root_path
@@ -79,16 +97,19 @@ describe 'usuário edita uma categoria' do
     end
     click_on 'Bicicleta'
 
-    click_on 'Desabilitar'
+    click_on 'Desativar'
 
-    expect(page).to have_selector(:link_or_button, 'Habilitar')
+    expect(page).to have_selector(:link_or_button, 'Ativar')
 
-    click_on 'Habilitar'
+    click_on 'Ativar'
 
-    expect(page).to have_selector(:link_or_button, 'Desabilitar')
+    expect(page).to have_selector(:link_or_button, 'Desativar')
   end
 
   it 'e retorna' do
+
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
 
     Category.create!(name: 'Bicicleta')
 

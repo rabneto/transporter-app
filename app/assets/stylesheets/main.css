@@ -58,7 +58,7 @@ body {
   
 }
 
-#sidebar .nav a{
+#sidebar .nav a {
   background: none;
   border-bottom: 1px solid #455A64;
   color: #CFD8DC;
@@ -73,4 +73,9 @@ body {
 
 #sidebar .nav a i{
   margin-right: 16px;
+}
+
+.navbar-nav > li > form > button {
+  margin-top: 7px !important;
+  margin-right: 10px !important;
 }

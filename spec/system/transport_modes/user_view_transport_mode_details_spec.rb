@@ -2,6 +2,10 @@ require 'rails_helper'
 
 describe 'usuário vêm detalhes do modelo de transporte' do
   it 'a partir da tela inicial' do
+
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
+
     TransportMode.create!(name: 'Rodoviário',
                           min_range: 100,
                           max_range: 300,
@@ -26,6 +30,9 @@ describe 'usuário vêm detalhes do modelo de transporte' do
 
   it 'e desativa uma modalidade de transporte' do
 
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
+
     TransportMode.create!(name: 'Rodoviário',
                           min_range: 100,
                           max_range: 300,
@@ -46,6 +53,9 @@ describe 'usuário vêm detalhes do modelo de transporte' do
   end
 
   it 'e reativa uma modalidade de transporte' do
+
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
 
     TransportMode.create!(name: 'Rodoviário',
                           min_range: 100,
@@ -71,6 +81,9 @@ describe 'usuário vêm detalhes do modelo de transporte' do
   end
 
   it 'e retorna' do
+
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
 
     TransportMode.create!(name: 'Rodoviário',
                           min_range: 100,

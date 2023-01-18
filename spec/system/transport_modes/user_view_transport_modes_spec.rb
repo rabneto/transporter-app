@@ -1,7 +1,12 @@
 require 'rails_helper'
 
 describe 'usuário vê modalidades de transporte' do
+
   it 'a partir do menu' do
+
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
+
     visit root_path
     within('#sidebar') do
       click_on 'Modalidades de Transporte'
@@ -10,6 +15,10 @@ describe 'usuário vê modalidades de transporte' do
   end
 
   it 'com sucesso' do
+
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
+
     TransportMode.create!(name: 'Rodoviário',
                           min_range: 100,
                           max_range: 300,
@@ -40,6 +49,9 @@ describe 'usuário vê modalidades de transporte' do
   end
 
   it 'e não existem fornecedores cadastrados' do
+
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
 
     visit root_path
     within('#sidebar') do

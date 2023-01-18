@@ -2,6 +2,10 @@ require 'rails_helper'
 
 describe 'usuário Cadastra uma categoria' do
   it 'a partir da tela inicial' do
+
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
+
     visit root_path
     within('#sidebar') do
       click_on 'Categorias'
@@ -13,6 +17,9 @@ describe 'usuário Cadastra uma categoria' do
   end
 
   it 'com sucesso' do
+
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
 
     visit root_path
     within('#sidebar') do
@@ -29,6 +36,9 @@ describe 'usuário Cadastra uma categoria' do
   end
 
   it 'com dados incompletos' do
+
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
 
     visit root_path
     within('#sidebar') do
