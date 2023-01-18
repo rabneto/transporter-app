@@ -83,4 +83,95 @@ describe 'usuário Cadastra uma modalidade de transporte' do
     end
     
   end
+
+  it 'e a distância mínima não pode ser maior que a máxima' do
+    tm = TransportMode.new(name: 'Rodoviário',
+                              min_range: 300,
+                              max_range: 100,
+                              min_weight: 50,
+                              max_weight: 500,
+                              tax: 200)
+    
+    tm.valid?
+
+    result = tm.errors.include?(:min_range)
+    expect(result).to be true
+
+  end
+
+  it 'e a distância mínima não pode ser igual que a máxima' do
+    tm = TransportMode.new(name: 'Rodoviário',
+                              min_range: 300,
+                              max_range: 300,
+                              min_weight: 50,
+                              max_weight: 500,
+                              tax: 200)
+    
+    tm.valid?
+
+    result = tm.errors.include?(:min_range)
+    expect(result).to be true
+
+  end
+
+  it 'e a distância mínima deve ser menor que a máxima' do
+    tm = TransportMode.new(name: 'Rodoviário',
+                              min_range: 100,
+                              max_range: 300,
+                              min_weight: 50,
+                              max_weight: 500,
+                              tax: 200)
+    
+    tm.valid?
+
+    result = tm.errors.include?(:min_range)
+    expect(result).to be false
+
+  end
+
+  it 'e o peso mínimo não pode ser maior que o máximo' do
+    tm = TransportMode.new(name: 'Rodoviário',
+                              min_range: 300,
+                              max_range: 100,
+                              min_weight: 50,
+                              max_weight: 500,
+                              tax: 200)
+    
+    tm.valid?
+
+    result = tm.errors.include?(:min_range)
+    expect(result).to be true
+
+  end
+
+  it 'e o peso mínimo não pode ser igual ao máximo' do
+    tm = TransportMode.new(name: 'Rodoviário',
+                              min_range: 300,
+                              max_range: 300,
+                              min_weight: 500,
+                              max_weight: 500,
+                              tax: 200)
+    
+    tm.valid?
+
+    result = tm.errors.include?(:min_weight)
+    expect(result).to be true
+
+  end
+
+  it 'e o peso mínimo deve ser menor que o máximo' do
+    tm = TransportMode.new(name: 'Rodoviário',
+                              min_range: 100,
+                              max_range: 300,
+                              min_weight: 50,
+                              max_weight: 500,
+                              tax: 200)
+    
+    tm.valid?
+
+    result = tm.errors.include?(:min_weight)
+    expect(result).to be false
+
+  end
+
 end

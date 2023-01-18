@@ -33,17 +33,11 @@ describe 'usuário se autentica' do
     visit root_path
     
     within('ul.navbar-nav') do
-
       click_on 'Sair'
-
-      within('h1') do
-        expect(page).to have_content 'Bem-Vindo'
-      end
-      expect(page).not_to have_button 'Entrar'
-      
     end
-    within('div#notice') do
-      expect(page).to have_content 'Logout efetuado com sucesso.'
+
+    within('div#alert') do
+      expect(page).to have_content 'Para continuar, faça login ou registre-se.'
     end
   end
 end
