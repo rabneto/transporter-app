@@ -1,0 +1,43 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-'12 col-md-8">
+      <h3>Tabela de Preços</h3>
+    </div>
+    <div class="col-xs-'12 col-md-4 text-right">
+      <%= link_to 'Cadastrar Novo', new_price_path, class: 'btn btn-default' %>
+    </div>
+  </div>
+
+  <% if @prices.any? %>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Valor por KM</th>
+        <th scope="col">Peso Mínimo</th>
+        <th scope="col">Peso Máximo</th>
+        <th scope="col">Modalidade de Transporte</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @prices.each do | p | %>
+      <tr>
+        <td>
+          <%= link_to edit_category_path(p) do %>
+            R$ <%= p.km_price / 100 %>
+          <% end %>
+        </td>
+        <td><%= p.min_weight %></td>
+        <td><%= p.max_weight %></td>
+        <td><%= p.transport_mode.name %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <% else %>
+    <hr />
+    <h3>Nenhuma configuração de preço cadastrada</h3>
+  <% end %>
+
+</div>
