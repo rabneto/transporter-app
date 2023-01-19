@@ -49,4 +49,42 @@ describe 'usuário vê veículos' do
     expect(page).to have_content('Nenhum veículo cadastrado')
 
   end
+
+  it 'e pesquisa por veículos' do
+
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
+
+    category = Category.create!(name: 'Moto')
+
+    Vehicle.create!(category: category,
+                              plate: 'GTT-7741',
+                              brand: 'Honda',
+                              model: 'Broz',
+                              year: 2018,
+                              max_weight: 70)
+
+    Vehicle.create!(category: category,
+                    plate: 'GTY-7532',
+                    brand: 'Honda',
+                    model: 'Pop',
+                    year: 2018,
+                    max_weight: 60)
+
+    visit root_path
+    within('#sidebar') do
+      click_on 'Veículos'
+    end
+    
+    within('table') do
+      expect(page).to have_content 'Broz'
+      expect(page).to have_content 'GTT-7741'
+      expect(page).to have_content '70'
+
+      expect(page).to have_content 'Pop'
+      expect(page).to have_content 'GTY-7532'
+      expect(page).to have_content '20'
+    end
+
+  end
 end

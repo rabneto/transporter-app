@@ -40,11 +40,11 @@ describe 'usuário vê modalidades de transporte' do
 
     expect(page).to have_content('Rodoviário')
     expect(page).to have_content('100 / 300')
-    expect(page).to have_content('50g / 500g')
+    expect(page).to have_content('50kg / 500kg')
 
     expect(page).to have_content('Marítimo')
     expect(page).to have_content('1000 / 35000')
-    expect(page).to have_content('5000g / 100000g')
+    expect(page).to have_content('5000kg / 100000kg')
 
   end
 

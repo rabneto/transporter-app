@@ -6,7 +6,13 @@ class TransportModesController < ApplicationController
     @transport_modes = TransportMode.all
   end
 
-  def show; end
+  def show
+    if(params[:q]).blank?
+      @vehicles = Vehicle.weight_between(@transport_mode.min_weight, @transport_mode.max_weight)
+    else
+      @vehicles = Vehicle.where('plate like ?', "%#{params[:q]}%").weight_between(@transport_mode.min_weight, @transport_mode.max_weight)
+    end
+  end
 
   def new
     @transport_mode = TransportMode.new

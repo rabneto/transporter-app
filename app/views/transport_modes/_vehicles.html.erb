@@ -3,17 +3,14 @@
     <div class="col-xs-'12 col-md-8">
       <h3>Veículos</h3>
     </div>
-    <div class="col-xs-12 col-md-4 text-right">
-      <%= link_to 'Cadastrar Novo', new_vehicle_path, class: 'btn btn-default' %>
-    </div>
     <div class="col-xs-12 col-md-12">
-      <%= form_with url: vehicles_path, class: "d-flex", method: :get do %>
-        <div class="col-xs-12 col-md-4 px-0">
+      <%= form_with url: request.path, id: 'pesquisa', class: "d-flex", method: :get do %>
+        <div class="col-xs-12 col-md-8 px-0">
           <%= text_field_tag :q, nil, class: 'form-control d-inline mb-3', placeholder: 'Digite a placa ou parte dela ...' %>
         </div>
-        <div class="col-xs-12 col-md-2">
+        <div class="col-xs-12 col-md-4">
           <%= submit_tag 'Pesquisar', class: "btn btn-default" %>
-          <%= link_to 'Ver Todos', vehicles_path, class: "btn btn-default" %>
+          <%= link_to 'Ver Todos', request.path, class: "btn btn-default" %>
         </div>
       <% end %>
     </div>
@@ -29,8 +26,8 @@
         <th scope="col">Marca</th>
         <th scope="col">Modelo</th>
         <th scope="col">Ano</th>
-        <th scope="col">Carga Máxima</th>
-        <th scope="col">Ativo?</th>
+        <th scope="col">Carga Máx</th>
+        <th scope="col"><span>&#9745;</span></th>
       </tr>
     </thead>
     <tbody>

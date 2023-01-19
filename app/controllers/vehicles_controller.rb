@@ -3,7 +3,11 @@ class VehiclesController < ApplicationController
   before_action :set_vehicle, only: [:edit, :show, :update, :active, :desactive]
 
   def index
-    @vehicles = Vehicle.all
+    if(params[:q]).present?
+      @vehicles = Vehicle.where('plate like ?', "%#{params[:q]}%")
+    else
+      @vehicles = Vehicle.all
+    end
   end
 
   def show; end
