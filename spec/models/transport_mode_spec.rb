@@ -15,6 +15,12 @@ RSpec.describe TransportMode, type: :model do
         result = tm.valid?
         expect(result).to eq false
       end
+      it 'false when min_range is higher than max_range' do
+        tm = TransportMode.new(name: 'Rodoviário', min_range: 30, max_range: 20,
+                              min_weight: 60, max_weight: 100, tax: 80)
+        result = tm.valid?
+        expect(result).to eq false
+      end
       it 'false when max_range is empty' do
         tm = TransportMode.new(name: 'Rodoviário', min_range: 10, max_range: '',
                               min_weight: 60, max_weight: 100, tax: 80)
@@ -24,6 +30,12 @@ RSpec.describe TransportMode, type: :model do
       it 'false when min_weight is empty' do
         tm = TransportMode.new(name: 'Rodoviário', min_range: 10, max_range: 20,
                               min_weight: '', max_weight: 100, tax: 80)
+        result = tm.valid?
+        expect(result).to eq false
+      end
+      it 'false when min_weight is higher than max_weight' do
+        tm = TransportMode.new(name: 'Rodoviário', min_range: 10, max_range: 20,
+                              min_weight: 100, max_weight: 50, tax: 80)
         result = tm.valid?
         expect(result).to eq false
       end

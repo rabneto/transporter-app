@@ -3,6 +3,7 @@ pt-BR:
     models:
       transport_mode: "Modalidades de Transporte"
       category: "Categorias"
+      vehicle: "Veículos"
     attributes:
       transport_mode:
         name: 'Nome'
@@ -14,4 +15,13 @@ pt-BR:
         active: 'Ativo?'
       category:
         name: "Nome"
+        status: "Ativo?"
+      vehicle:
+        category: "Categoria"
+        category_id: "Categoria"
+        plate: "Placa"
+        brand: "Marca"
+        model: "Modelo"
+        year: "Ano de Fabricação"
+        max_weight: "Carga Máxima"
         status: "Ativo?"

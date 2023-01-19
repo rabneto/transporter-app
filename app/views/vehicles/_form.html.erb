@@ -1,0 +1,51 @@
+<% if @vehicle.errors.any? %>
+<div id="errors" class="alert alert-danger" role="alert">
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+        <% @vehicle.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<hr />
+
+
+<div class="row mx-0">
+    <div class="col-xs-12 col-md-6">
+        <%= form_with model: @vehicle do |v| %>
+
+        <div class="form_field col-sm-6 pb-3">
+            <%= v.label :category_id, class: "form-label" %>
+            <%= v.collection_select :category_id, @categories, :id, :name,  { include_blank: true }, class: "form-control" %>
+        </div>
+        <div class="form_field col-sm-12 col-md-6 pb-3">
+            <%= v.label :plate, class: "form-label" %>
+            <%= v.text_field :plate, class: "form-control" %>
+        </div>
+        <div class="form_field col-sm-12 col-md-6 pb-3">
+            <%= v.label :brand, class: "form-label" %>
+            <%= v.text_field :brand, class: "form-control" %>
+        </div>
+        <div class="form_field col-sm-12 col-md-6 pb-3">
+            <%= v.label :model, class: "form-label" %>
+            <%= v.text_field :model, class: "form-control" %>
+        </div>
+        <div class="form_field col-sm-12 col-md-6 pb-3">
+            <%= v.label :year, class: "form-label" %>
+            <%= v.text_field :year, class: "form-control" %>
+        </div>
+        <div class="form_field col-sm-12 col-md-6 pb-3">
+            <%= v.label :max_weight, class: "form-label" %>
+            <%= v.text_field :max_weight, class: "form-control" %>
+        </div>
+
+        <div class="col-sm-12 col-md-12 pb-3">
+            <%= v.submit "Salvar", class: "btn btn-primary btn-lg" %>
+            <%= link_to 'Voltar', vehicles_path, class: "btn btn-default btn-lg" %>
+        </div>
+    
+        <% end %>
+    </div>
+</div>

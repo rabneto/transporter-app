@@ -1,0 +1,49 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-'12 col-md-8">
+      <h3>Veículos</h3>
+    </div>
+    <div class="col-xs-'12 col-md-4 text-right">
+      <%= link_to 'Cadastrar Novo', new_vehicle_path, class: 'btn btn-default' %>
+    </div>
+  </div>
+
+  <% if @vehicles.any? %>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Placa</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Modelo</th>
+        <th scope="col">Ano</th>
+        <th scope="col">Carga Máxima</th>
+        <th scope="col">Ativo?</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @vehicles.each do | v | %>
+      <tr>
+        <td><%= link_to v.plate, v %></td>
+        <td><%= v.category.name %></td>
+        <td><%= v.brand %></td>
+        <td><%= v.model %></td>
+        <td><%= v.year %></td>
+        <td><%= v.max_weight %></td>
+        <td>
+          <% if v.status == 'enable' %>
+            <span>&#9745;</span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <% else %>
+    <hr />
+    <h3>Nenhum veículo cadastrado</h3>
+  <% end %>
+
+</div>

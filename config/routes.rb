@@ -13,4 +13,9 @@ Rails.application.routes.draw do
     patch :active, on: :member
   end
 
+  resources :vehicles, only: [:index, :show, :new, :create, :edit, :update] do
+    patch :desactive, on: :member
+    patch :active, on: :member
+  end
+
 end

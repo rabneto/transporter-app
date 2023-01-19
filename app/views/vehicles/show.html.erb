@@ -1,0 +1,58 @@
+<h3 class="mb-3">Veículo</h3>
+
+<div class="row mx-0">
+    <div class="col-xs-12 col-md-6">
+        <%= form_with model: @vehicle do |v| %>
+
+        <div class="form_field col-sm-6 pb-3">
+            <%= v.label :category_id, class: "form-label" %>
+            <%= v.text_field :category_id, value: @vehicle.category.name, class: "form-control", readonly: true %>
+        </div>
+        <div class="form_field col-sm-12 col-md-6 pb-3">
+            <%= v.label :plate, class: "form-label" %>
+            <%= v.text_field :plate, class: "form-control", readonly: true %>
+        </div>
+        <div class="form_field col-sm-12 col-md-6 pb-3">
+            <%= v.label :brand, class: "form-label" %>
+            <%= v.text_field :brand, class: "form-control", readonly: true %>
+        </div>
+        <div class="form_field col-sm-12 col-md-6 pb-3">
+            <%= v.label :model, class: "form-label" %>
+            <%= v.text_field :model, class: "form-control", readonly: true %>
+        </div>
+        <div class="form_field col-sm-12 col-md-6 pb-3">
+            <%= v.label :year, class: "form-label" %>
+            <%= v.text_field :year, class: "form-control", readonly: true %>
+        </div>
+        <div class="form_field col-sm-12 col-md-6 pb-3">
+            <%= v.label :max_weight, class: "form-label" %>
+            <%= v.text_field :max_weight, class: "form-control", readonly: true %>
+        </div>
+        <div class="form_field col-sm-12 col-md-12 pb-3">
+            <%= v.label :status, class: "form-label" %>
+            <% if @vehicle.enable?
+                ativo = 'Ativo'
+               else
+                ativo = 'Em Manutenção'
+               end %>
+            <%= v.text_field :status, value: ativo, class: "form-control", readonly: true %>
+        </div>
+
+         <% end %>
+
+        <div class="col-sm-12 col-md-6 pb-3">
+            <%= link_to 'Editar', edit_vehicle_path(@vehicle), class: "btn btn-primary btn-lg" %>
+            <%= link_to 'Voltar', vehicles_path, class: "btn btn-default btn-lg" %>
+        </div>
+
+        <div class="col-sm-12 col-md-6 text-right">
+            <% if @vehicle.enable? %>
+                <%= button_to "Colocar em Manutenção", desactive_vehicle_path, { method: 'patch', class: "btn btn-default btn-lg" } %>
+            <% else %>
+                <%= button_to "Ativar", active_vehicle_path, { method: 'patch', class: "btn btn-default btn-lg" } %>
+            <% end %>
+        </div>
+    
+       
+    </div>
+</div>
