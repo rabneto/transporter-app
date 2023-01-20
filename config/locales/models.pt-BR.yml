@@ -5,6 +5,7 @@ pt-BR:
       category: "Categorias"
       vehicle: "Veículos"
       price: "Preços"
+      deadline: "Prazos"
     attributes:
       transport_mode:
         name: 'Nome'
@@ -32,3 +33,9 @@ pt-BR:
         min_weight: "Peso mínimo"
         max_weight: "Peso máximo"
         km_price: "Preço por km"
+      deadline:
+        transport_mode: "Modalidade de Transporte"
+        transport_mode_id: "Modalidade de Transporte"
+        min_range: "Distância mínima"
+        max_range: "Distância máxima"
+        hours: "Prazo"

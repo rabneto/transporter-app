@@ -10,12 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_19_202345) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_20_192445) do
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 1
+  end
+
+  create_table "deadlines", force: :cascade do |t|
+    t.integer "min_range"
+    t.integer "max_range"
+    t.integer "hours"
+    t.integer "transport_mode_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["transport_mode_id"], name: "index_deadlines_on_transport_mode_id"
   end
 
   create_table "prices", force: :cascade do |t|
@@ -66,6 +76,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_19_202345) do
     t.index ["category_id"], name: "index_vehicles_on_category_id"
   end
 
+  add_foreign_key "deadlines", "transport_modes"
   add_foreign_key "prices", "transport_modes"
   add_foreign_key "vehicles", "categories"
 end

@@ -1,0 +1,53 @@
+<% if @deadline.errors.any? %>
+<div id="errors" class="alert alert-danger" role="alert">
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+        <% @deadline.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<hr />
+
+
+<div class="row mx-0">
+    <div class="col-xs-12 col-md-6">
+        <%= form_with model: @deadline do |d| %>
+
+        <div class="form_field col-sm-6 pb-3">
+            <%= d.label :transport_mode_id, class: "form-label" %>
+            <%= d.collection_select :transport_mode_id, @transport_modes, :id, :name,  { include_blank: true }, class: "form-control" %>
+        </div>
+
+        <div class="form_field col-sm-12 pb-3">
+            <%= d.label :min_range, class: "form-label" %>
+            <%= d.text_field :min_range, class: "form-control" %>
+        </div>
+
+        <div class="form_field col-sm-12 pb-3">
+            <%= d.label :max_range, class: "form-label" %>
+            <%= d.text_field :max_range, class: "form-control" %>
+        </div>
+
+        <div class="form_field col-sm-12 pb-3">
+            <%= d.label :hours, class: "form-label" %>
+            <%= d.text_field :hours, class: "form-control" %>
+        </div>
+        
+        <div class="col-sm-12 col-md-6 pb-3">
+            <%= d.submit "Salvar", class: "btn btn-primary btn-lg" %>
+            <%= link_to 'Voltar', deadlines_path, class: "btn btn-default btn-lg" %>
+        </div>
+    
+        <% end %>
+
+        <div class="col-sm-12 col-md-6 pb-3 text-right">
+            <% if params[:id].present? %>
+                <%= button_to 'Remover', @deadline, method: :delete, class: "btn btn-danger btn-lg" %>
+            <% end %>
+        </div>
+
+    </div>
+</div>

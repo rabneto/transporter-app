@@ -36,11 +36,17 @@
             <%= p.text_field :km_price, class: "form-control" %>
         </div>
         
-        <div class="col-sm-12 col-md-12 pb-3">
+        <div class="col-sm-12 col-md-6 pb-3">
             <%= p.submit "Salvar", class: "btn btn-primary btn-lg" %>
             <%= link_to 'Voltar', prices_path, class: "btn btn-default btn-lg" %>
         </div>
     
         <% end %>
+
+        <div class="col-sm-12 col-md-6 pb-3 text-right">
+            <% if params[:id].present? %>
+            <%= button_to 'Remover', @price, method: :delete, class: "btn btn-danger btn-lg" %>
+            <% end %>
+        </div>
     </div>
 </div>

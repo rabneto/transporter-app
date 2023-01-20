@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     patch :active, on: :member
   end
 
-  resources :prices, only: [:index, :new, :create, :edit, :update]
+  resources :prices, only: [:index, :new, :create, :edit, :update, :destroy]
+  resources :deadlines, only: [:index, :new, :create, :edit, :update, :destroy]
 
 end

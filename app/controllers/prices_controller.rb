@@ -1,6 +1,6 @@
 class PricesController < ApplicationController
 
-  before_action :set_price, only: [:edit, :update]
+  before_action :set_price, only: [:edit, :update, :destroy]
 
   def index
     @prices = Price.order(transport_mode_id: :asc, min_weight: :asc).all
@@ -15,7 +15,7 @@ class PricesController < ApplicationController
     @transport_modes = TransportMode.all
     @price = Price.new(price_params)
     if @price.save
-      flash.now[:notice] = "Preço cadastrado com sucesso."
+      flash[:notice] = "Preço cadastrado com sucesso."
       redirect_to prices_path
     else
       flash.now[:alert] = "Preço não cadastrado."
@@ -30,12 +30,21 @@ class PricesController < ApplicationController
   def update
     @transport_modes = TransportMode.all
     if @price.update(price_params)
-      redirect_to prices_path, notice: 'Preço atualizado com sucesso'
+      flash[:notice] = "Preço atualizado com sucesso."
+      redirect_to prices_path
     else
       flash.now[:alert] = "Não foi possível atualizar o preço."
       render 'edit'
     end
   end
+
+  def destroy
+    @price.destroy
+    flash[:alert] = "Preço removido com sucesso."
+    redirect_to prices_path
+  end
+
+  private
 
   def set_price
     @price = Price.find(params[:id])

@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-'12 col-md-8">
+      <h3>Tabela de Prazos</h3>
+    </div>
+  </div>
+
+  <% if @deadlines.any? %>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Prazo</th>
+        <th scope="col">Distância Mínima / Distância Máxima</th>
+        <th scope="col">Modalidade de Transporte</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @deadlines.each do | d | %>
+      <tr>
+        <td>
+          <%= link_to edit_deadline_path(d) do %>
+            <%= d.hours %> horas
+          <% end %>
+        </td>
+        <td><%= d.min_range %>km / <%= d.max_range %>km</td>
+        <td><%= d.transport_mode.name %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <% else %>
+    <hr />
+    <h3>Nenhuma configuração de prazo cadastrada</h3>
+  <% end %>
+
+</div>

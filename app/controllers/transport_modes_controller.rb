@@ -13,6 +13,7 @@ class TransportModesController < ApplicationController
       @vehicles = Vehicle.where('plate like ?', "%#{params[:q]}%").weight_between(@transport_mode.min_weight, @transport_mode.max_weight)
     end
     @prices = Price.where('transport_mode_id = ?', params[:id])
+    @deadlines = Deadline.where('transport_mode_id = ?', params[:id])
   end
 
   def new
@@ -25,7 +26,6 @@ class TransportModesController < ApplicationController
       flash[:notice] = 'Modelo de produto cadastrado com sucesso.'
       redirect_to @transport_mode
     else
-      @transport_modes = TransportMode.all
       flash.now[:alert] = "Modalidade de Transporte não cadastrado."
       render 'new'
     end
