@@ -1,0 +1,46 @@
+<% if @price.errors.any? %>
+<div id="errors" class="alert alert-danger" role="alert">
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+        <% @price.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<hr />
+
+
+<div class="row mx-0">
+    <div class="col-xs-12 col-md-6">
+        <%= form_with model: @price do |p| %>
+
+        <div class="form_field col-sm-6 pb-3">
+            <%= p.label :transport_mode_id, class: "form-label" %>
+            <%= p.collection_select :transport_mode_id, @transport_modes, :id, :name,  { include_blank: true }, class: "form-control" %>
+        </div>
+
+        <div class="form_field col-sm-12 pb-3">
+            <%= p.label :min_weight, class: "form-label" %>
+            <%= p.text_field :min_weight, class: "form-control" %>
+        </div>
+
+        <div class="form_field col-sm-12 pb-3">
+            <%= p.label :max_weight, class: "form-label" %>
+            <%= p.text_field :max_weight, class: "form-control" %>
+        </div>
+
+        <div class="form_field col-sm-12 pb-3">
+            <%= p.label :km_price, class: "form-label" %>
+            <%= p.text_field :km_price, class: "form-control" %>
+        </div>
+        
+        <div class="col-sm-12 col-md-12 pb-3">
+            <%= p.submit "Salvar", class: "btn btn-primary btn-lg" %>
+            <%= link_to 'Voltar', prices_path, class: "btn btn-default btn-lg" %>
+        </div>
+    
+        <% end %>
+    </div>
+</div>

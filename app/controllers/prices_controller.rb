@@ -1,31 +1,34 @@
 class PricesController < ApplicationController
 
-  before_action :set_price, only: [:edit, :update, :active, :desactive]
+  before_action :set_price, only: [:edit, :update]
 
   def index
-    @prices = Price.all
+    @prices = Price.order(transport_mode_id: :asc, min_weight: :asc).all
   end
 
   def new
+    @transport_modes = TransportMode.order(name: :asc).all
     @price = Price.new
   end
 
   def create
+    @transport_modes = TransportMode.all
     @price = Price.new(price_params)
     if @price.save
       flash.now[:notice] = "Preço cadastrado com sucesso."
-      redirect_to categories_path
+      redirect_to prices_path
     else
-      flash.now[:alert] = "Preço não cadastrada."
+      flash.now[:alert] = "Preço não cadastrado."
       render 'new'
     end
   end
 
   def edit
+    @transport_modes = TransportMode.all
   end
 
   def update
-
+    @transport_modes = TransportMode.all
     if @price.update(price_params)
       redirect_to prices_path, notice: 'Preço atualizado com sucesso'
     else
@@ -39,7 +42,7 @@ class PricesController < ApplicationController
   end
 
   def price_params
-    params.require(:price).permit(:min_weight, :max_weight, :km_price, :transporte_mode_id)
+    params.require(:price).permit(:min_weight, :max_weight, :km_price, :transport_mode_id)
   end
   
 end

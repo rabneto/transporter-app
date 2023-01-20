@@ -25,9 +25,9 @@ describe 'usuário vê preços' do
                           max_weight: 50,
                           tax: 200)
 
-    Price.create!(min_weight: 1, max_weight: 10, km_price: 80, transporte_mode: tm)
-    Price.create!(min_weight: 11, max_weight: 20, km_price: 50, transporte_mode: tm)
-    Price.create!(min_weight: 21, max_weight: 30, km_price: 30, transporte_mode: tm)
+    Price.create!(min_weight: 1, max_weight: 10, km_price: 80, transport_mode: tm)
+    Price.create!(min_weight: 11, max_weight: 20, km_price: 50, transport_mode: tm)
+    Price.create!(min_weight: 21, max_weight: 30, km_price: 30, transport_mode: tm)
 
     visit root_path
     within('#sidebar') do
@@ -36,15 +36,15 @@ describe 'usuário vê preços' do
 
     expect(page).to have_content('Express')
     expect(page).to have_content('1kg / 10kg')
-    expect(page).to have_content('R$ 0,80')
+    expect(page).to have_content('R$ 80')
 
     expect(page).to have_content('Express')
     expect(page).to have_content('11kg / 20kg')
-    expect(page).to have_content('R$ 0,50')
+    expect(page).to have_content('R$ 50')
 
     expect(page).to have_content('Express')
     expect(page).to have_content('21kg / 30kg')
-    expect(page).to have_content('R$ 0,30')
+    expect(page).to have_content('R$ 30')
 
   end
 

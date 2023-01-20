@@ -4,6 +4,7 @@ pt-BR:
       transport_mode: "Modalidades de Transporte"
       category: "Categorias"
       vehicle: "Veículos"
+      price: "Preços"
     attributes:
       transport_mode:
         name: 'Nome'
@@ -25,3 +26,9 @@ pt-BR:
         year: "Ano de Fabricação"
         max_weight: "Carga Máxima"
         status: "Ativo?"
+      price:
+        transport_mode: "Modalidade de Transporte"
+        transport_mode_id: "Modalidade de Transporte"
+        min_weight: "Peso mínimo"
+        max_weight: "Peso máximo"
+        km_price: "Preço por km"

@@ -12,6 +12,7 @@ class TransportModesController < ApplicationController
     else
       @vehicles = Vehicle.where('plate like ?', "%#{params[:q]}%").weight_between(@transport_mode.min_weight, @transport_mode.max_weight)
     end
+    @prices = Price.where('transport_mode_id = ?', params[:id])
   end
 
   def new
