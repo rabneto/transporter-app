@@ -1,5 +1,9 @@
 class TransportMode < ApplicationRecord
   enum active: { enable: 1, disable: 0 }
+  
+  has_many :prices
+  has_many :deadlines
+  
   validates :name, :min_range, :max_range, :min_weight, :max_weight, :tax, presence: true
   validate :min_range_not_higher_than_max_range, :min_weight_not_higher_than_max_weight
 

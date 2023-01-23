@@ -99,7 +99,7 @@ describe 'usuário Cadastra uma modalidade de transporte' do
 
   end
 
-  it 'e a distância mínima não pode ser igual que a máxima' do
+  it 'e a distância mínima não pode ser igual a máxima' do
     tm = TransportMode.new(name: 'Rodoviário',
                               min_range: 300,
                               max_range: 300,

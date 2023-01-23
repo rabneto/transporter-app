@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_20_192445) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_22_213822) do
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -26,6 +26,40 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_20_192445) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["transport_mode_id"], name: "index_deadlines_on_transport_mode_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "code"
+    t.datetime "start"
+    t.datetime "deadline"
+    t.datetime "delivered"
+    t.string "delay_reason"
+    t.integer "distance"
+    t.string "product_id"
+    t.integer "product_width"
+    t.integer "product_height"
+    t.integer "product_depth"
+    t.integer "product_weight"
+    t.string "origin_address"
+    t.string "origin_city"
+    t.string "origin_uf"
+    t.string "destiny_address"
+    t.string "destiny_city"
+    t.string "destiny_uf"
+    t.string "recipient_document"
+    t.string "recipient_email"
+    t.string "recipient_phone"
+    t.integer "status", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "price"
+    t.string "recipient_name"
+    t.string "sender_name"
+    t.string "sender_document"
+    t.string "sender_phone"
+    t.string "sender_email"
+    t.integer "transport_mode_id"
+    t.integer "vehicle_id"
   end
 
   create_table "prices", force: :cascade do |t|

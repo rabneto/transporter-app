@@ -75,15 +75,20 @@ describe 'usuário vê veículos' do
     within('#sidebar') do
       click_on 'Veículos'
     end
+
+    search_field= find_by_id('q')
+    search_field.set('GTT')
+    click_on 'Pesquisar'
+
     
     within('table') do
       expect(page).to have_content 'Broz'
       expect(page).to have_content 'GTT-7741'
       expect(page).to have_content '70'
 
-      expect(page).to have_content 'Pop'
-      expect(page).to have_content 'GTY-7532'
-      expect(page).to have_content '20'
+      expect(page).not_to have_content 'Pop'
+      expect(page).not_to have_content 'GTY-7532'
+      expect(page).not_to have_content '60'
     end
 
   end

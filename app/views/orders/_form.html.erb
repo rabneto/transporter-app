@@ -1,0 +1,182 @@
+<% if @order.errors.any? %>
+<div id="errors" class="alert alert-danger" role="alert">
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+        <% @order.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<hr />
+
+
+<div class="row mx-0">
+
+    <%= form_with model: @order do |o| %>
+
+    <div class="col-xs-12 col-md-6">
+
+        <% if params[:id].present? %>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Código</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 pb-3">
+                        <%= o.text_field :code, class: "form-control", readonly: true %>
+                    </div>
+                    <div class="col-sm-12 col-md-6 pb-3">
+                    <%  status = ""
+                        classe = ""
+                        if @order.status == "pendent"
+                          status = "Pendente"
+                          classe = " text-danger"
+                        elsif @order.status == "in_delivery"
+                          status = "Saiu para entrega"
+                          classe = " text-warning"
+                        elsif @order.status == "delivered"
+                          status = "Entregue"
+                          classe = " text-success"
+                        end %>
+                        <%= o.text_field :status, class: "form-control#{classe}", readonly: true, value: status %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% end %>
+        
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Produto</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 pb-3">
+                        <%= o.label :product_id, class: "form-label" %>
+                        <%= o.text_field :product_id, class: "form-control" %>
+                    </div>
+                    <div class="col-sm-12 col-md-6 pb-3">
+                        <%= o.label :product_weight, class: "form-label" %>
+                        <%= o.text_field :product_weight, class: "form-control", placeholder: "em gramas" %>
+                    </div>
+                    <div class="col-sm-12 col-md-4 pb-3">
+                        <%= o.label :product_width, class: "form-label" %>
+                        <%= o.text_field :product_width, class: "form-control", placeholder: "em centímetros" %>
+                    </div>
+                    <div class="col-sm-12 col-md-4 pb-3">
+                        <%= o.label :product_height, class: "form-label" %>
+                        <%= o.text_field :product_height, class: "form-control", placeholder: "em centímetros" %>
+                    </div>
+                    <div class="col-sm-12 col-md-4 pb-3">
+                        <%= o.label :product_depth, class: "form-label" %>
+                        <%= o.text_field :product_depth, class: "form-control", placeholder: "em centímetros" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Origem e Destino</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form_field col-sm-12 col-md-6 pb-3">
+                        <%= o.label :origin_address, class: "form-label" %>
+                        <%= o.text_field :origin_address, class: "form-control" %>
+                    </div>
+                    <div class="form_field col-sm-12 col-md-4 pb-3">
+                        <%= o.label :origin_city, class: "form-label" %>
+                        <%= o.text_field :origin_city, class: "form-control" %>
+                    </div>
+                    <div class="form_field col-sm-12 col-md-2 pb-3">
+                        <%= o.label :origin_uf, class: "form-label" %>
+                        <%= o.text_field :origin_uf, class: "form-control" %>
+                    </div>
+                    <div class="form_field col-sm-12 col-md-6 pb-3">
+                        <%= o.label :destiny_address, class: "form-label" %>
+                        <%= o.text_field :destiny_address, class: "form-control" %>
+                    </div>
+                    <div class="form_field col-sm-12 col-md-4 pb-3">
+                        <%= o.label :destiny_city, class: "form-label" %>
+                        <%= o.text_field :destiny_city, class: "form-control" %>
+                    </div>
+                    <div class="form_field col-sm-12 col-md-2 pb-3">
+                        <%= o.label :destiny_uf, class: "form-label" %>
+                        <%= o.text_field :destiny_uf, class: "form-control" %>
+                    </div>
+                    <div class="form_field col-sm-6 col-md-12 pb-3">
+                        <%= o.label :distance, class: "form-label" %>
+                        <%= o.text_field :distance, class: "form-control", placeholder: "em km" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-12 pb-3">
+            <%= o.submit "Salvar", class: "btn btn-primary btn-lg" %>
+            <%= link_to 'Voltar', orders_path, class: "btn btn-default btn-lg" %>
+        </div>
+
+    </div>
+
+    <div class="col-xs-12 col-md-6">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Remetente</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form_field col-sm-12 col-md-12 pb-3">
+                        <%= o.label :sender_name, class: "form-label" %>
+                        <%= o.text_field :sender_name, class: "form-control" %>
+                    </div>
+                    <div class="form_field col-sm-12 col-md-6 pb-3">
+                        <%= o.label :sender_document, class: "form-label" %>
+                        <%= o.text_field :sender_document, class: "form-control", placeholder: "informe somente números" %>
+                    </div>
+                    <div class="form_field col-sm-12 col-md-6 pb-3">
+                        <%= o.label :sender_phone, class: "form-label" %>
+                        <%= o.text_field :sender_phone, class: "form-control" %>
+                    </div>
+                    <div class="form_field col-sm-12 col-md-12 pb-3">
+                        <%= o.label :sender_email, class: "form-label" %>
+                        <%= o.text_field :sender_email, class: "form-control" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Destinatário</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form_field col-sm-12 col-md-12 pb-3">
+                    <%= o.label :recipient_name, class: "form-label" %>
+                    <%= o.text_field :recipient_name, class: "form-control" %>
+                </div>
+                <div class="form_field col-sm-12 col-md-6 pb-3">
+                    <%= o.label :recipient_document, class: "form-label" %>
+                    <%= o.text_field :recipient_document, class: "form-control", placeholder: "informe somente números" %>
+                </div>
+                <div class="form_field col-sm-12 col-md-6 pb-3">
+                    <%= o.label :recipient_phone, class: "form-label" %>
+                    <%= o.text_field :recipient_phone, class: "form-control" %>
+                </div>
+                <div class="form_field col-sm-12 col-md-12 pb-3">
+                    <%= o.label :recipient_email, class: "form-label" %>
+                    <%= o.text_field :recipient_email, class: "form-control" %>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+    <% end %>
+
+</div>
