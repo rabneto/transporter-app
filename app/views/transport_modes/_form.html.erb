@@ -38,7 +38,7 @@
         </div>
         <div class="form_field col-sm-12 col-md-6 pb-3">
             <%= tm.label :tax, class: "form-label" %>
-            <%= tm.text_field :tax, class: "form-control" %>
+            <%= tm.text_field :tax, value: number_with_precision(@transport_mode.tax, precision: 2), class: "form-control" %>
         </div>
 
         <div class="col-sm-12 col-md-12 pb-3">

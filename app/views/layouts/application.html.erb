@@ -15,7 +15,9 @@
       <!-- Sidebar -->
       <div id="sidebar">
         <header>
-          <%= link_to 'Transporter APP', root_path %>
+          <%= link_to root_path do %>
+          <strong>&#9850;</strong> Transporter APP
+          <% end %>
         </header>
         <ul class="nav">
           <li>
@@ -35,6 +37,9 @@
           </li>
           <li>
             <%= link_to 'Ordens de Entrega', orders_path %>
+          </li>
+          <li>
+            <%= link_to 'Orçamentos', orders_pending_path %>
           </li>
         </ul>
       </div>

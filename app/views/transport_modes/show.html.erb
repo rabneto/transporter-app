@@ -26,7 +26,7 @@
         </div>
         <div class="form_field col-sm-12 col-md-6 pb-3">
             <%= tm.label :tax, class: "form-label" %>
-            <%= tm.text_field :tax, class: "form-control", readonly: true %>
+            <%= tm.text_field :tax, value: number_with_precision(@transport_mode.tax, precision: 2), class: "form-control", readonly: true %>
         </div>
         <div class="form_field col-sm-12 col-md-6 pb-3">
             <%= tm.label :active, class: "form-label" %>

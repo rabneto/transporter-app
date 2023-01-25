@@ -22,9 +22,9 @@ describe 'usuário Cadastra uma ordem de entrega' do
     expect(page).to have_field('Endereço de Origem')
     expect(page).to have_field('Cidade de Origem')
     expect(page).to have_field('UF de Origem')
-    expect(page).to have_field('Endereço de destino')
-    expect(page).to have_field('Cidade de destino')
-    expect(page).to have_field('UF de destino')
+    expect(page).to have_field('Endereço de Destino')
+    expect(page).to have_field('Cidade de Destino')
+    expect(page).to have_field('UF de Destino')
     expect(page).to have_field('Distância')
 
     expect(page).to have_field('Nome do remetente')
@@ -58,9 +58,9 @@ describe 'usuário Cadastra uma ordem de entrega' do
     fill_in('Endereço de Origem', with: 'Rua das Flores, 34')
     fill_in('Cidade de Origem', with: 'Belém')
     fill_in('UF de Origem', with: 'PA')
-    fill_in('Endereço de destino', with: 'Passagem Cabrobro, 3567')
-    fill_in('Cidade de destino', with: 'Ananindeua')
-    fill_in('UF de destino', with: 'PA')
+    fill_in('Endereço de Destino', with: 'Passagem Cabrobro, 3567')
+    fill_in('Cidade de Destino', with: 'Ananindeua')
+    fill_in('UF de Destino', with: 'PA')
     fill_in('Distância', with: '25')
 
     fill_in('Nome do remetente', with: 'Fernando Paulo')
@@ -87,9 +87,9 @@ describe 'usuário Cadastra uma ordem de entrega' do
     expect(page).to have_field('Endereço de Origem', with: 'Rua das Flores, 34')
     expect(page).to have_field('Cidade de Origem', with: 'Belém')
     expect(page).to have_field('UF de Origem', with: 'PA')
-    expect(page).to have_field('Endereço de destino', with: 'Passagem Cabrobro, 3567')
-    expect(page).to have_field('Cidade de destino', with: 'Ananindeua')
-    expect(page).to have_field('UF de destino', with: 'PA')
+    expect(page).to have_field('Endereço de Destino', with: 'Passagem Cabrobro, 3567')
+    expect(page).to have_field('Cidade de Destino', with: 'Ananindeua')
+    expect(page).to have_field('UF de Destino', with: 'PA')
     expect(page).to have_field('Distância')
 
     expect(page).to have_field('Nome do remetente', with: 'Fernando Paulo')
@@ -132,9 +132,9 @@ describe 'usuário Cadastra uma ordem de entrega' do
       expect(page).to have_content 'Nome do remetente não pode ficar em branco'
       expect(page).to have_content 'CPF do remetente não pode ficar em branco'
       expect(page).to have_content 'Telefone do remetente não pode ficar em branco'
-      expect(page).to have_content 'Endereço de destino não pode ficar em branco'
-      expect(page).to have_content 'Cidade de destino não pode ficar em branco'
-      expect(page).to have_content 'UF de destino não pode ficar em branco'
+      expect(page).to have_content 'Endereço de Destino não pode ficar em branco'
+      expect(page).to have_content 'Cidade de Destino não pode ficar em branco'
+      expect(page).to have_content 'UF de Destino não pode ficar em branco'
       expect(page).to have_content 'Nome do destinatário não pode ficar em branco'
       expect(page).to have_content 'CPF do destinatário não pode ficar em branco'
       expect(page).to have_content 'Telefone do destinatário não pode ficar em branco'

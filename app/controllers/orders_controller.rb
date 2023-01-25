@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 
-  before_action :set_order, only: [:show, :edit, :update]
+  before_action :set_order, only: [:edit, :update]
 
   def index
     if(params[:q]).present?
@@ -10,7 +10,26 @@ class OrdersController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @order = Order.includes(:transport_mode, :vehicle).find(params[:id])
+  end
+
+  def pending
+    @orders = Order.pendent
+  end
+
+  def show_pending
+    @order = Order.find(params[:id])
+
+    if !@order.pendent?
+      @orders = Order.pendent
+      flash[:alert] = "Não é possível gerar orçamento para esta ordem de entrega. Verifique se a mesma está em entrega ou entregue."
+      redirect_to orders_pending_path
+    end
+
+    @transport_modes = TransportMode.weight_and_range_between(@order.product_weight, @order.distance).enable
+
+  end
 
   def new
     @order = Order.new
@@ -70,7 +89,8 @@ class OrdersController < ApplicationController
                                   :recipient_document,
                                   :recipient_email,
                                   :recipient_phone,
-                                  :transport_mode_id)
+                                  :transport_mode_id,
+                                  :vehicle_id)
   end
 
 end

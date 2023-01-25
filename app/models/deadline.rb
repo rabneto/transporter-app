@@ -3,6 +3,10 @@ class Deadline < ApplicationRecord
   validates :min_range, :max_range, :hours, presence: true
   validate :min_range_not_higher_than_max_range, :min_range_not_lower_than_tm_min_range, :max_range_not_higher_than_tm_max_range
 
+  scope :range_between, ->(distance) {
+    where("min_range <= ? AND max_range >= ?", distance, distance)
+  }
+
   def min_range_not_higher_than_max_range
     if self.min_range.present? && self.max_range.present?
       if self.min_range >= self.max_range

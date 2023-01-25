@@ -37,7 +37,7 @@ describe 'usuário Cadastra uma modalidade de transporte' do
     fill_in 'Distância Máxima', with: '800'
     fill_in 'Peso Mínimo', with: '150'
     fill_in 'Peso Máximo', with: '300'
-    fill_in 'Taxa Fixa', with: '250'
+    fill_in 'Taxa Fixa', with: '250,00'
 
     click_on 'Salvar'
 
@@ -46,7 +46,7 @@ describe 'usuário Cadastra uma modalidade de transporte' do
     expect(page).to have_field('Distância Máxima', with: '800')
     expect(page).to have_field('Peso Mínimo', with: '150')
     expect(page).to have_field('Peso Máximo', with: '300')
-    expect(page).to have_field('Taxa Fixa', with: '250')
+    expect(page).to have_field('Taxa Fixa', with: '250,00')
 
   end
 

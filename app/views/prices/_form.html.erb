@@ -33,7 +33,7 @@
 
         <div class="form_field col-sm-12 pb-3">
             <%= p.label :km_price, class: "form-label" %>
-            <%= p.text_field :km_price, class: "form-control" %>
+            <%= p.text_field :km_price, value: number_with_precision(@price.km_price, precision: 2), class: "form-control" %>
         </div>
         
         <div class="col-sm-12 col-md-6 pb-3">

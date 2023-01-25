@@ -1,4 +1,7 @@
 class Order < ApplicationRecord
+
+  belongs_to :transport_mode, optional: true
+  belongs_to :vehicle, optional: true
   enum status: { pendent: 1, in_delivery: 2, delivered: 3 }
   
   before_create :generate_code
@@ -30,4 +33,9 @@ class Order < ApplicationRecord
   def created_at
     self.created_at = created_at.strftime("posted on %b, %m %Y - %H:%M")
   end
+
+  def pending
+    self.created_at = created_at.strftime("posted on %b, %m %Y - %H:%M")
+  end
+
 end

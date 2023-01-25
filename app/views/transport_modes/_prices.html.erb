@@ -20,7 +20,7 @@
       <tr>
         <td>
           <%= link_to edit_price_path(p) do %>
-            R$ <%= p.km_price %>
+          <%= number_to_currency(p.km_price, unit: "R$", separator: ",", delimiter: "") %>
           <% end %>
         </td>
         <td><%= p.min_weight %>kg / <%= p.max_weight %>kg</td>

@@ -1,0 +1,56 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-'12 col-md-8">
+      <h3>Modalidades de Transporte</h3>
+    </div>
+  </div>
+
+  <% if @transport_modes.any? %>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Taxa</th>
+        <th scope="col">valor por km</th>
+        <th scope="col">Preço</th>
+        <th scope="col">Prazo</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @transport_modes.each do | tm |
+       price = Price.weight_between(@order.product_weight).where('transport_mode_id = ?', tm).first
+       deadline = Deadline.range_between(@order.distance).where('transport_mode_id = ?', tm).first
+    %>
+      <tr>
+        <td><%= tm.name %></td>
+        <td><%= number_to_currency(tm.tax, unit: "R$", separator: ",", delimiter: "") %></td>
+        <td><%= number_to_currency(price.km_price, unit: "R$", separator: ",", delimiter: "") %></td>
+        <td>
+          <% total = tm.tax + (@order.distance * price.km_price) %>
+          <%= number_to_currency(total, unit: "R$", separator: ",", delimiter: "") %>
+        </td>
+        <td>
+          <% if deadline.nil? %>
+            N/C
+          <% else %>
+          <%= deadline.hours %>h
+          <% end %>
+        </td>
+        <td>
+        <% if !deadline.nil? %>
+        <%= link_to "Iniciar Entrega", root_path, class: "btn btn-primary btn-sm" %>
+        <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <% else %>
+    <hr />
+    <h3>Nenhuma modalidade de transporte encontrada</h3>
+  <% end %>
+
+</div>

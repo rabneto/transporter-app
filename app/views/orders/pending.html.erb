@@ -1,21 +1,18 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-'12 col-md-8">
-      <h3>Ordens de Entrega</h3>
+      <h3>Gerar Orçamento</h3>
     </div>
     <div class="col-xs-12 col-md-8">
-      <%= form_with url: orders_path, class: "d-flex", method: :get do %>
+      <%= form_with url: orders_pending_path, class: "d-flex", method: :get do %>
         <div class="col-xs-12 col-md-6 px-0">
           <%= text_field_tag :q, nil, class: 'form-control d-inline mb-3', placeholder: 'Pesquisar ...' %>
         </div>
         <div class="col-xs-12 col-md-6">
           <%= submit_tag 'Pesquisar', class: "btn btn-default" %>
-          <%= link_to 'Ver Todas', orders_path, class: "btn btn-default" %>
+          <%= link_to 'Ver Todas', orders_pending_path, class: "btn btn-default" %>
         </div>
       <% end %>
-    </div>
-    <div class="col-xs-'12 col-md-4 text-right">
-      <%= link_to 'Cadastrar Nova', new_order_path, class: 'btn btn-default' %>
     </div>
   </div>
 
@@ -34,13 +31,11 @@
     <tbody>
     <% @orders.each do | o | %>
       <tr>
-        <td><%= link_to o.code, o %></td>
+        <td><%= link_to o.code, order_pending_path(o.id) %></td>
         <td><%= o.sender_name %></td>
         <td><%= o.recipient_name %></td>
         <td>
           <%= o.status == "pendent" ? "Pendente" : "" %>
-          <%= o.status == "in_delivery" ? "Saiu para entrega" : "" %>
-          <%= o.status == "delivered" ? "Entregue" : "" %>
         </td>
         <td><%= o.updated_at.to_fs(:extense) %></td>
       </tr>
@@ -50,7 +45,7 @@
 
   <% else %>
     <hr />
-    <h3>Nenhuma ordem de entrega cadastrada</h3>
+    <h3>Nenhum orçamento pendente</h3>
   <% end %>
 
 </div>

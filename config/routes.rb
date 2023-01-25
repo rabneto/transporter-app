@@ -26,4 +26,7 @@ Rails.application.routes.draw do
     patch :delivered, on: :member
   end
 
+  get "/pending/:id", to: 'orders#show_pending', as: 'order_pending'
+  get "/pending", to: 'orders#pending', as: 'orders_pending'
+
 end

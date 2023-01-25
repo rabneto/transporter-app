@@ -22,6 +22,9 @@ class TransportModesController < ApplicationController
 
   def create
     @transport_mode = TransportMode.new(transport_mode_params)
+    if !params[:transport_mode][:tax].empty?
+      @transport_mode.tax = params[:transport_mode][:tax].gsub(",",".").to_f
+    end
     if @transport_mode.save
       flash[:notice] = 'Modelo de produto cadastrado com sucesso.'
       redirect_to @transport_mode
@@ -35,7 +38,9 @@ class TransportModesController < ApplicationController
   end
 
   def update
-
+    if !params[:transport_mode][:tax].empty?
+      @transport_mode.tax = params[:transport_mode][:tax].gsub(",",".").to_f
+    end
     if @transport_mode.update(transport_mode_params)
       flash[:notice] = 'Modelo de produto atualizado com sucesso'
       redirect_to @transport_mode

@@ -31,6 +31,19 @@
                         <%= o.label :status, class: "form-label" %>
                         <%= o.text_field :status, class: "form-control#{classe}", readonly: true, value: status %>
                     </div>
+
+                    <% if @order.status != "pendent" %>
+                        <div class="col-sm-12 col-md-6 pb-3">
+                            <%= o.label :transport_mode_id, class: "form-label" %>
+                            <% tm = @order.transport_mode_id.nil? ? "" : @order.transport_mode.name %>
+                            <%= o.text_field :transport_mode_id, value: tm, class: "form-control", readonly: true %>
+                        </div>
+                        <div class="col-sm-12 col-md-6 pb-3">
+                            <%= o.label :vehicle_id, class: "form-label" %>
+                            <% vehicle = @order.vehicle_id.nil? ? "" : @order.vehicle.plate %>
+                            <%= o.text_field :vehicle_id, value: vehicle, class: "form-control", readonly: true %>
+                        </div>
+                    <% end %>
                 </div>
             </div>
         </div>
@@ -114,6 +127,40 @@
     </div>
 
     <div class="col-xs-12 col-md-6">
+
+        <% if @order.status != "pendent" %>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Informações de Entrega</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-4 pb-3">
+                        <%= o.label :start, class: "form-label" %>
+                        <%= o.text_field :start, value: @order.start.to_fs(:extense), class: "form-control", readonly: true %>
+                    </div>
+                    <div class="col-sm-12 col-md-4 pb-3">
+                        <%= o.label :deadline, class: "form-label" %>
+                        <%= o.text_field :dealine, value: @order.deadline.to_fs(:extense), class: "form-control", readonly: true %>
+                    </div>
+                    <div class="col-sm-12 col-md-4 pb-3">
+                        <%= o.label :delivered, class: "form-label" %>
+                        <%= o.text_field :delivered, value: @order.delivered.to_fs(:extense), class: "form-control", readonly: true %>
+                    </div>
+                    <div class="col-sm-12 col-md-4 pb-3">
+                        <%= o.label :price, class: "form-label" %>
+                        <%= o.text_field :price, value: number_to_currency(@order.price, unit: "R$", separator: ",", delimiter: ""), class: "form-control", readonly: true %>
+                    </div>
+                    <% if @order.delivered > @order.deadline %>
+                    <div class="col-sm-12 col-md-12 pb-3">
+                        <%= o.label :delay_reason, class: "form-label" %>
+                        <%= o.text_field :delay_reason, class: "form-control", readonly: true %>
+                    </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <% end %>
 
         <div class="panel panel-default">
             <div class="panel-heading">

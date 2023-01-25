@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_22_213822) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_25_034756) do
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -52,7 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_22_213822) do
     t.integer "status", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "price"
+    t.decimal "price"
     t.string "recipient_name"
     t.string "sender_name"
     t.string "sender_document"
@@ -65,7 +65,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_22_213822) do
   create_table "prices", force: :cascade do |t|
     t.integer "min_weight"
     t.integer "max_weight"
-    t.integer "km_price"
+    t.decimal "km_price"
     t.integer "transport_mode_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -78,7 +78,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_22_213822) do
     t.integer "max_range"
     t.integer "min_weight"
     t.integer "max_weight"
-    t.integer "tax"
+    t.decimal "tax"
     t.integer "active", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

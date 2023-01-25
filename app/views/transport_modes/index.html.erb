@@ -24,9 +24,9 @@
     <% @transport_modes.each do | tm | %>
       <tr>
         <td><%= link_to tm.name, tm %></td>
-        <td><%= tm.min_range %> / <%= tm.max_range %></td>
+        <td><%= tm.min_range %>km / <%= tm.max_range %>km</td>
         <td><%= tm.min_weight %>kg / <%= tm.max_weight %>kg</td>
-        <td>R$ <%= tm.tax %></td>
+        <td><%= number_to_currency(tm.tax, unit: "R$", separator: ",", delimiter: "") %></td>
         <td>
           <% if tm.active == 'enable' %>  
             <span>&#9745;</span>

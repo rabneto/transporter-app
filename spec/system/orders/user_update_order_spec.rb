@@ -56,9 +56,9 @@ describe 'usuário edita uma ordem de serviço' do
     fill_in('Endereço de Origem', with: 'Avenida B, 123')
     fill_in('Cidade de Origem', with: 'Guarulhos')
     fill_in('UF de Origem', with: 'SP')
-    fill_in('Endereço de destino', with: 'Av. Paulisa, 234 - Sala 605')
-    fill_in('Cidade de destino', with: 'São Paulo')
-    fill_in('UF de destino', with: 'SP')
+    fill_in('Endereço de Destino', with: 'Av. Paulisa, 234 - Sala 605')
+    fill_in('Cidade de Destino', with: 'São Paulo')
+    fill_in('UF de Destino', with: 'SP')
     fill_in('Distância', with: '25')
 
     fill_in('Nome do remetente', with: 'Fernando Paulo')
@@ -127,9 +127,9 @@ describe 'usuário edita uma ordem de serviço' do
     fill_in('Endereço de Origem', with: 'Avenida B, 123')
     fill_in('Cidade de Origem', with: 'Guarulhos')
     fill_in('UF de Origem', with: 'SP')
-    fill_in('Endereço de destino', with: 'Av. Paulisa, 234 - Sala 605')
-    fill_in('Cidade de destino', with: 'São Paulo')
-    fill_in('UF de destino', with: 'SP')
+    fill_in('Endereço de Destino', with: 'Av. Paulisa, 234 - Sala 605')
+    fill_in('Cidade de Destino', with: 'São Paulo')
+    fill_in('UF de Destino', with: 'SP')
     fill_in('Distância', with: '25')
 
     fill_in('Nome do remetente', with: 'Fernando Paulo')
@@ -156,9 +156,9 @@ describe 'usuário edita uma ordem de serviço' do
     expect(page).to have_field('Endereço de Origem', with: 'Avenida B, 123')
     expect(page).to have_field('Cidade de Origem', with: 'Guarulhos')
     expect(page).to have_field('UF de Origem', with: 'SP')
-    expect(page).to have_field('Endereço de destino', with: 'Av. Paulisa, 234 - Sala 605')
-    expect(page).to have_field('Cidade de destino', with: 'São Paulo')
-    expect(page).to have_field('UF de destino', with: 'SP')
+    expect(page).to have_field('Endereço de Destino', with: 'Av. Paulisa, 234 - Sala 605')
+    expect(page).to have_field('Cidade de Destino', with: 'São Paulo')
+    expect(page).to have_field('UF de Destino', with: 'SP')
     expect(page).to have_field('Distância')
 
     expect(page).to have_field('Nome do remetente', with: 'Fernando Paulo')
@@ -227,9 +227,9 @@ describe 'usuário edita uma ordem de serviço' do
     fill_in('Endereço de Origem', with: '')
     fill_in('Cidade de Origem', with: '')
     fill_in('UF de Origem', with: '')
-    fill_in('Endereço de destino', with: '')
-    fill_in('Cidade de destino', with: '')
-    fill_in('UF de destino', with: '')
+    fill_in('Endereço de Destino', with: '')
+    fill_in('Cidade de Destino', with: '')
+    fill_in('UF de Destino', with: '')
     fill_in('Distância', with: '')
 
     fill_in('Nome do remetente', with: '')
@@ -260,9 +260,9 @@ describe 'usuário edita uma ordem de serviço' do
       expect(page).to have_content 'Nome do remetente não pode ficar em branco'
       expect(page).to have_content 'CPF do remetente não pode ficar em branco'
       expect(page).to have_content 'Telefone do remetente não pode ficar em branco'
-      expect(page).to have_content 'Endereço de destino não pode ficar em branco'
-      expect(page).to have_content 'Cidade de destino não pode ficar em branco'
-      expect(page).to have_content 'UF de destino não pode ficar em branco'
+      expect(page).to have_content 'Endereço de Destino não pode ficar em branco'
+      expect(page).to have_content 'Cidade de Destino não pode ficar em branco'
+      expect(page).to have_content 'UF de Destino não pode ficar em branco'
       expect(page).to have_content 'Nome do destinatário não pode ficar em branco'
       expect(page).to have_content 'CPF do destinatário não pode ficar em branco'
       expect(page).to have_content 'Telefone do destinatário não pode ficar em branco'

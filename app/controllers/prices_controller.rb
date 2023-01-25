@@ -3,7 +3,7 @@ class PricesController < ApplicationController
   before_action :set_price, only: [:edit, :update, :destroy]
 
   def index
-    @prices = Price.order(transport_mode_id: :asc, min_weight: :asc).all
+    @prices = Price.includes(:transport_mode).order(transport_mode_id: :asc, min_weight: :asc).all
   end
 
   def new
@@ -14,6 +14,9 @@ class PricesController < ApplicationController
   def create
     @transport_modes = TransportMode.all
     @price = Price.new(price_params)
+    if !params[:price][:km_price].empty?
+      @price.km_price = params[:price][:km_price].gsub(",",".").to_f
+    end
     if @price.save
       flash[:notice] = "Preço cadastrado com sucesso."
       redirect_to prices_path
@@ -29,6 +32,9 @@ class PricesController < ApplicationController
 
   def update
     @transport_modes = TransportMode.all
+    if !params[:price][:km_price].empty?
+      @price.km_price = params[:price][:km_price].gsub(",",".").to_f
+    end
     if @price.update(price_params)
       flash[:notice] = "Preço atualizado com sucesso."
       redirect_to prices_path

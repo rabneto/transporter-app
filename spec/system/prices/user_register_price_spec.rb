@@ -47,11 +47,11 @@ describe 'usuário Cadastra um preço' do
     select 'Express', from: 'Modalidade de Transporte'
     fill_in 'Peso mínimo', with: '10'
     fill_in 'Peso máximo', with: '50'
-    fill_in 'Preço por km', with: '80'
+    fill_in 'Preço por km', with: '80,00'
     
     click_on 'Salvar'
 
-    expect(page).to have_content 'R$ 80'
+    expect(page).to have_content 'R$ 80,00'
 
   end
 
@@ -127,7 +127,7 @@ describe 'usuário Cadastra um preço' do
     select 'Express', from: 'Modalidade de Transporte'
     fill_in 'Peso mínimo', with: '1'
     fill_in 'Peso máximo', with: '40'
-    fill_in 'Preço por km', with: '80'
+    fill_in 'Preço por km', with: '80,00'
     
     click_on 'Salvar'
 
@@ -168,7 +168,7 @@ describe 'usuário Cadastra um preço' do
     select 'Express', from: 'Modalidade de Transporte'
     fill_in 'Peso mínimo', with: '10'
     fill_in 'Peso máximo', with: '100'
-    fill_in 'Preço por km', with: '80'
+    fill_in 'Preço por km', with: '80,00'
     
     click_on 'Salvar'
 

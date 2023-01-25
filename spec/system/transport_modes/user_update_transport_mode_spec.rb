@@ -26,7 +26,7 @@ describe 'usuário editar uma modalidade de transporte' do
     expect(page).to have_field 'Distância Máxima', with: '300'
     expect(page).to have_field 'Peso Mínimo', with: '50'
     expect(page).to have_field 'Peso Máximo', with: '500'
-    expect(page).to have_field 'Taxa Fixa', with: '200'
+    expect(page).to have_field 'Taxa Fixa', with: '200,00'
   end
 
   it 'com sucesso' do
@@ -53,7 +53,7 @@ describe 'usuário editar uma modalidade de transporte' do
     fill_in 'Distância Máxima', with: '320'
     fill_in 'Peso Mínimo', with: '55'
     fill_in 'Peso Máximo', with: '550'
-    fill_in 'Taxa Fixa', with: '220'
+    fill_in 'Taxa Fixa', with: '220,00'
 
     click_on 'Salvar'
 
@@ -65,7 +65,7 @@ describe 'usuário editar uma modalidade de transporte' do
     expect(page).to have_field('Distância Máxima', with: '320')
     expect(page).to have_field('Peso Mínimo', with: '55')
     expect(page).to have_field('Peso Máximo', with: '550')
-    expect(page).to have_field('Taxa Fixa', with: '220')
+    expect(page).to have_field('Taxa Fixa', with: '220,00')
   end
 
   it 'e mantêm os campos obrigatórios' do

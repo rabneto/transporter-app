@@ -24,7 +24,7 @@ describe 'usuário edita um preço' do
     expect(page).to have_field 'Modalidade de Transporte', with: tm.id
     expect(page).to have_field 'Peso mínimo', with: '5'
     expect(page).to have_field 'Peso máximo', with: '10'
-    expect(page).to have_field 'Preço por km', with: '80'
+    expect(page).to have_field 'Preço por km', with: '80,00'
   end
 
   it 'com sucesso' do
@@ -51,19 +51,19 @@ describe 'usuário edita um preço' do
     within('#sidebar') do
       click_on 'Preços'
     end
-    click_link 'R$ 80'
+    click_link 'R$ 80,00'
 
     select 'Express Urbana', from: 'Modalidade de Transporte'
     fill_in 'Peso mínimo', with: '1'
     fill_in 'Peso máximo', with: '5'
-    fill_in 'Preço por km', with: '25'
+    fill_in 'Preço por km', with: '25,00'
 
     click_on 'Salvar'
 
     within('div#notice') do
       expect(page).to have_content 'Preço atualizado com sucesso'
     end
-    expect(page).to have_content 'R$ 25'
+    expect(page).to have_content 'R$ 25,00'
     expect(page).to have_content '1kg / 5kg'
     expect(page).to have_content 'Express Urbana'
   end
@@ -92,7 +92,7 @@ describe 'usuário edita um preço' do
     within('#sidebar') do
       click_on 'Preços'
     end
-    click_link 'R$ 80'
+    click_link 'R$ 80,00'
 
     select '', from: 'Modalidade de Transporte'
     fill_in 'Peso mínimo', with: ''

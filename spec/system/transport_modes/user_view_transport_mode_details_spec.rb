@@ -24,7 +24,7 @@ describe 'usuário vêm detalhes do modelo de transporte' do
     expect(page).to have_field 'Distância Máxima', with: '300'
     expect(page).to have_field 'Peso Mínimo', with: '50'
     expect(page).to have_field 'Peso Máximo', with: '500'
-    expect(page).to have_field 'Taxa Fixa', with: '200'
+    expect(page).to have_field 'Taxa Fixa', with: '200,00'
 
   end
 

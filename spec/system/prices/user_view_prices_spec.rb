@@ -36,15 +36,15 @@ describe 'usuário vê preços' do
 
     expect(page).to have_content('Express')
     expect(page).to have_content('1kg / 10kg')
-    expect(page).to have_content('R$ 80')
+    expect(page).to have_content('R$ 80,00')
 
     expect(page).to have_content('Express')
     expect(page).to have_content('11kg / 20kg')
-    expect(page).to have_content('R$ 50')
+    expect(page).to have_content('R$ 50,00')
 
     expect(page).to have_content('Express')
     expect(page).to have_content('21kg / 30kg')
-    expect(page).to have_content('R$ 30')
+    expect(page).to have_content('R$ 30,00')
 
   end
 

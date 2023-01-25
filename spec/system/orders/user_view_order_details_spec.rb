@@ -55,9 +55,9 @@ describe 'usuário vêm detalhes de uma ordem de entrega' do
     expect(page).to have_field('Endereço de Origem', with: 'Avenida B, 123')
     expect(page).to have_field('Cidade de Origem', with: 'Guarulhos')
     expect(page).to have_field('UF de Origem', with: 'SP')
-    expect(page).to have_field('Endereço de destino', with: 'Av. Paulisa, 234 - Sala 605')
-    expect(page).to have_field('Cidade de destino', with: 'São Paulo')
-    expect(page).to have_field('UF de destino', with: 'SP')
+    expect(page).to have_field('Endereço de Destino', with: 'Av. Paulisa, 234 - Sala 605')
+    expect(page).to have_field('Cidade de Destino', with: 'São Paulo')
+    expect(page).to have_field('UF de Destino', with: 'SP')
 
     expect(page).to have_field('Nome do remetente', with: 'Fernando Paulo')
     expect(page).to have_field('CPF do remetente', with: '12345678978')

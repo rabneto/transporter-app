@@ -1,0 +1,109 @@
+<h3 class="mb-3">Gerar Orçamento</h3>
+<hr />
+
+<div class="row mx-0">
+
+    <%= form_with model: @order do |o| %>
+
+    <div class="col-xs-12 col-md-6">
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 pb-3">
+                        <%= o.label :code, class: "form-label" %>
+                        <%= o.text_field :code, class: "form-control", readonly: true %>
+                    </div>
+                    <div class="col-sm-12 col-md-6 pb-3">
+                    <%  
+                        status = "Pendente"
+                        classe = " text-danger"
+                    %>
+                        <%= o.label :status, class: "form-label" %>
+                        <%= o.text_field :status, class: "form-control#{classe}", readonly: true, value: status %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Produto</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 pb-3">
+                        <%= o.label :product_id, class: "form-label" %>
+                        <%= o.text_field :product_id, class: "form-control", readonly: true %>
+                    </div>
+                    <div class="col-sm-12 col-md-6 pb-3">
+                        <%= o.label :product_weight, class: "form-label" %>
+                        <%= o.text_field :product_weight, class: "form-control", readonly: true %>
+                    </div>
+                    <div class="col-sm-12 col-md-4 pb-3">
+                        <%= o.label :product_width, class: "form-label" %>
+                        <%= o.text_field :product_width, class: "form-control", readonly: true %>
+                    </div>
+                    <div class="col-sm-12 col-md-4 pb-3">
+                        <%= o.label :product_height, class: "form-label" %>
+                        <%= o.text_field :product_height, class: "form-control", readonly: true %>
+                    </div>
+                    <div class="col-sm-12 col-md-4 pb-3">
+                        <%= o.label :product_depth, class: "form-label" %>
+                        <%= o.text_field :product_depth, class: "form-control", readonly: true %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Origem e Destino</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form_field col-sm-12 col-md-6 pb-3">
+                        <%= o.label :origin_address, class: "form-label" %>
+                        <%= o.text_field :origin_address, class: "form-control", readonly: true %>
+                    </div>
+                    <div class="form_field col-sm-12 col-md-4 pb-3">
+                        <%= o.label :origin_city, class: "form-label" %>
+                        <%= o.text_field :origin_city, class: "form-control", readonly: true %>
+                    </div>
+                    <div class="form_field col-sm-12 col-md-2 pb-3">
+                        <%= o.label :origin_uf, class: "form-label" %>
+                        <%= o.text_field :origin_uf, class: "form-control", readonly: true %>
+                    </div>
+                    <div class="form_field col-sm-12 col-md-6 pb-3">
+                        <%= o.label :destiny_address, class: "form-label" %>
+                        <%= o.text_field :destiny_address, class: "form-control", readonly: true %>
+                    </div>
+                    <div class="form_field col-sm-12 col-md-4 pb-3">
+                        <%= o.label :destiny_city, class: "form-label" %>
+                        <%= o.text_field :destiny_city, class: "form-control", readonly: true %>
+                    </div>
+                    <div class="form_field col-sm-12 col-md-2 pb-3">
+                        <%= o.label :destiny_uf, class: "form-label" %>
+                        <%= o.text_field :destiny_uf, class: "form-control", readonly: true %>
+                    </div>
+                    <div class="form_field col-sm-6 col-md-12 pb-3">
+                        <%= o.label :distance, class: "form-label" %>
+                        <%= o.text_field :distance, class: "form-control", readonly: true %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-12 pb-3">
+            <%= link_to 'Voltar', orders_pending_path, class: "btn btn-default btn-lg" %>
+        </div>
+
+    </div>
+
+    <div class="col-xs-12 col-md-6">
+        <%= render 'transport_modes_order' %>
+    </div>
+
+    <% end %>
+
+</div>
