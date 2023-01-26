@@ -79,3 +79,11 @@ body {
   margin-top: 7px !important;
   margin-right: 10px !important;
 }
+
+.blink {
+  animation: blinker 2s linear infinite;
+}
+
+@keyframes blinker {  
+  50% { opacity: 0.4; }
+}

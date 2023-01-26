@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 
-  before_action :set_order, only: [:edit, :update]
+  before_action :set_order, only: [:edit, :update, :show_pending, :change_to_in_delivery]
 
   def index
     if(params[:q]).present?
@@ -19,17 +19,59 @@ class OrdersController < ApplicationController
   end
 
   def show_pending
-    @order = Order.find(params[:id])
-
+    
     if !@order.pendent?
       @orders = Order.pendent
-      flash[:alert] = "Não é possível gerar orçamento para esta ordem de entrega. Verifique se a mesma está em entrega ou entregue."
+      flash[:alert] = "Não é possível gerar orçamento para esta ordem de entrega. Verifique se a mesma já saiu para entrega ou já foi entregue."
       redirect_to orders_pending_path
     end
 
     @transport_modes = TransportMode.weight_and_range_between(@order.product_weight, @order.distance).enable
 
   end
+
+  def change_to_in_delivery #######################################################################################################
+    
+    if !@order.pendent?
+      @orders = Order.pendent
+      flash[:alert] = "Não é possível iniciar uma entrega para esta ordem de entrega. Verifique se a mesma já saiu para entrega ou já foi entregue."
+      redirect_to orders_pending_path
+    end
+
+    transport_mode = TransportMode.find(params[:tm])
+    price = Price.find(params[:p])
+    vehicle = Vehicle.weight_between(transport_mode.min_weight, transport_mode.max_weight).enable.first
+    #puts " "
+    #puts "modalidade de transporte: #{transport_mode.name}"
+    #puts "taxa: #{transport_mode.tax}"
+    #puts "preço por km: #{price.km_price}"
+    #puts  "placa: #{vehicle.plate}"
+    #puts " "
+    
+    deadline = Deadline.find(params[:d])
+
+    prazo = deadline.hours
+
+    @order.transport_mode_id = transport_mode.id
+    @order.vehicle_id = vehicle.id
+    @order.start = DateTime.now()
+    @order.deadline = DateTime.now() + prazo.hours
+    @order.tax = transport_mode.tax
+    @order.km_price = price.km_price
+    @order.price = transport_mode.tax + (@order.distance * price.km_price)
+
+    sucess = @order.save
+
+    if sucess
+      @order.in_delivery!
+      vehicle.in_delivery!
+      flash[:notice] = "Ordem de Entrega atualizada com sucesso."
+      redirect_to @order
+    else
+      flash.now[:alert] = "Não foi possível atualizar a ordem de serviço."
+    end
+
+  end #######################################################################################################
 
   def new
     @order = Order.new
@@ -49,6 +91,7 @@ class OrdersController < ApplicationController
   def edit; end
 
   def update
+    
     if @order.update(order_params)
       flash[:notice] = "Ordem de Entrega atualizada com sucesso."
       redirect_to @order

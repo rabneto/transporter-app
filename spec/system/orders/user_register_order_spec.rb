@@ -79,10 +79,10 @@ describe 'usuário Cadastra uma ordem de entrega' do
       expect(page).to have_content 'Ordem de Entrega cadastrada com sucesso.'
     end
     expect(page).to have_field('Identificação do Produto', with: 'Tv 40 polegadas')
-    expect(page).to have_field('Peso do Produto', with: '5000')
-    expect(page).to have_field('Largura do Produto', with: '110')
-    expect(page).to have_field('Altura do Produto', with: '80')
-    expect(page).to have_field('Comprimento do Produto', with: '20')
+    expect(page).to have_field('Peso do Produto', with: '5000 kg')
+    expect(page).to have_field('Largura do Produto', with: '110 cm')
+    expect(page).to have_field('Altura do Produto', with: '80 cm')
+    expect(page).to have_field('Comprimento do Produto', with: '20 cm')
 
     expect(page).to have_field('Endereço de Origem', with: 'Rua das Flores, 34')
     expect(page).to have_field('Cidade de Origem', with: 'Belém')
@@ -90,7 +90,7 @@ describe 'usuário Cadastra uma ordem de entrega' do
     expect(page).to have_field('Endereço de Destino', with: 'Passagem Cabrobro, 3567')
     expect(page).to have_field('Cidade de Destino', with: 'Ananindeua')
     expect(page).to have_field('UF de Destino', with: 'PA')
-    expect(page).to have_field('Distância')
+    expect(page).to have_field('Distância', with: '25 km')
 
     expect(page).to have_field('Nome do remetente', with: 'Fernando Paulo')
     expect(page).to have_field('CPF do remetente', with: '12345678945')

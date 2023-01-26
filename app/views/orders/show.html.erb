@@ -60,19 +60,19 @@
                     </div>
                     <div class="col-sm-12 col-md-6 pb-3">
                         <%= o.label :product_weight, class: "form-label" %>
-                        <%= o.text_field :product_weight, class: "form-control", readonly: true %>
+                        <%= o.text_field :product_weight, value: "#{@order.product_weight} kg", class: "form-control", readonly: true %>
                     </div>
                     <div class="col-sm-12 col-md-4 pb-3">
                         <%= o.label :product_width, class: "form-label" %>
-                        <%= o.text_field :product_width, class: "form-control", readonly: true %>
+                        <%= o.text_field :product_width, value: "#{@order.product_width} cm", class: "form-control", readonly: true %>
                     </div>
                     <div class="col-sm-12 col-md-4 pb-3">
                         <%= o.label :product_height, class: "form-label" %>
-                        <%= o.text_field :product_height, class: "form-control", readonly: true %>
+                        <%= o.text_field :product_height, value: "#{@order.product_height} cm", class: "form-control", readonly: true %>
                     </div>
                     <div class="col-sm-12 col-md-4 pb-3">
                         <%= o.label :product_depth, class: "form-label" %>
-                        <%= o.text_field :product_depth, class: "form-control", readonly: true %>
+                        <%= o.text_field :product_depth, value: "#{@order.product_depth} cm", class: "form-control", readonly: true %>
                     </div>
                 </div>
             </div>
@@ -110,7 +110,7 @@
                     </div>
                     <div class="form_field col-sm-6 col-md-12 pb-3">
                         <%= o.label :distance, class: "form-label" %>
-                        <%= o.text_field :distance, class: "form-control", readonly: true %>
+                        <%= o.text_field :distance, value: "#{@order.distance} km", class: "form-control", readonly: true %>
                     </div>
                 </div>
             </div>
@@ -143,20 +143,24 @@
                         <%= o.label :deadline, class: "form-label" %>
                         <%= o.text_field :dealine, value: @order.deadline.to_fs(:extense), class: "form-control", readonly: true %>
                     </div>
+                    <% if @order.status == "delivered" %>
                     <div class="col-sm-12 col-md-4 pb-3">
                         <%= o.label :delivered, class: "form-label" %>
                         <%= o.text_field :delivered, value: @order.delivered.to_fs(:extense), class: "form-control", readonly: true %>
                     </div>
+                    <% end %>
                     <div class="col-sm-12 col-md-4 pb-3">
                         <%= o.label :price, class: "form-label" %>
                         <%= o.text_field :price, value: number_to_currency(@order.price, unit: "R$", separator: ",", delimiter: ""), class: "form-control", readonly: true %>
                     </div>
-                    <% if @order.delivered > @order.deadline %>
+                    <% if !@order.delivered.nil?
+                         if @order.delivered > @order.deadline %>
                     <div class="col-sm-12 col-md-12 pb-3">
                         <%= o.label :delay_reason, class: "form-label" %>
                         <%= o.text_field :delay_reason, class: "form-control", readonly: true %>
                     </div>
-                    <% end %>
+                    <%   end
+                       end %>
                 </div>
             </div>
         </div>

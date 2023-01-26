@@ -32,15 +32,23 @@
       </tr>
     </thead>
     <tbody>
-    <% @orders.each do | o | %>
+    <% @orders.each do | o |
+        if o.status == "pendent"
+           status = "Pendente"
+           status_class = "text-danger"
+        elsif o.status == "in_delivery"
+           status = "Sai para entrega"
+           status_class = "text-warning blink"
+        elsif o.status == "delivered"
+           status = "Entregue"
+           status_class = "text-success"
+        end %>
       <tr>
         <td><%= link_to o.code, o %></td>
         <td><%= o.sender_name %></td>
         <td><%= o.recipient_name %></td>
-        <td>
-          <%= o.status == "pendent" ? "Pendente" : "" %>
-          <%= o.status == "in_delivery" ? "Saiu para entrega" : "" %>
-          <%= o.status == "delivered" ? "Entregue" : "" %>
+        <td class="<%= status_class %>">
+          <%= status %>
         </td>
         <td><%= o.updated_at.to_fs(:extense) %></td>
       </tr>

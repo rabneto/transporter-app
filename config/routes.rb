@@ -29,4 +29,7 @@ Rails.application.routes.draw do
   get "/pending/:id", to: 'orders#show_pending', as: 'order_pending'
   get "/pending", to: 'orders#pending', as: 'orders_pending'
 
+  get "/in_delivery/:id/tm/:tm/p/:p/d/:d", to: 'orders#change_to_in_delivery'
+
+
 end

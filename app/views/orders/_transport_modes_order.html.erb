@@ -40,7 +40,7 @@
         </td>
         <td>
         <% if !deadline.nil? %>
-        <%= link_to "Iniciar Entrega", root_path, class: "btn btn-primary btn-sm" %>
+        <%= link_to "Iniciar Entrega", "/in_delivery/#{params[:id]}/tm/#{tm.id}/p/#{price.id}/d/#{deadline.id}", class: "btn btn-primary btn-sm" %>
         <% end %>
         </td>
       </tr>

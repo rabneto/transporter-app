@@ -29,13 +29,20 @@
       </tr>
     </thead>
     <tbody>
-    <% @orders.each do | o | %>
+    <% @orders.each do | o |
+        if o.status == "pendent"
+           status = "Pendente"
+           status_class = "text-danger"
+        else
+           status = "???"
+           status_class = "text-danger"
+        end %>
       <tr>
         <td><%= link_to o.code, order_pending_path(o.id) %></td>
         <td><%= o.sender_name %></td>
         <td><%= o.recipient_name %></td>
-        <td>
-          <%= o.status == "pendent" ? "Pendente" : "" %>
+        <td class="<%= status_class %>">
+          <%= status %>
         </td>
         <td><%= o.updated_at.to_fs(:extense) %></td>
       </tr>

@@ -47,10 +47,10 @@ describe 'usuário vêm detalhes de uma ordem de entrega' do
     expect(page).to have_field 'Situação', with: 'Pendente'
     
     expect(page).to have_field('Identificação do Produto', with: 'tv 41 polegadas')
-    expect(page).to have_field('Peso do Produto', with: '3000')
-    expect(page).to have_field('Largura do Produto', with: '120')
-    expect(page).to have_field('Altura do Produto', with: '80')
-    expect(page).to have_field('Comprimento do Produto', with: '20')
+    expect(page).to have_field('Peso do Produto', with: '3000 kg')
+    expect(page).to have_field('Largura do Produto', with: '120 cm')
+    expect(page).to have_field('Altura do Produto', with: '80 cm')
+    expect(page).to have_field('Comprimento do Produto', with: '20 cm')
 
     expect(page).to have_field('Endereço de Origem', with: 'Avenida B, 123')
     expect(page).to have_field('Cidade de Origem', with: 'Guarulhos')
@@ -58,6 +58,7 @@ describe 'usuário vêm detalhes de uma ordem de entrega' do
     expect(page).to have_field('Endereço de Destino', with: 'Av. Paulisa, 234 - Sala 605')
     expect(page).to have_field('Cidade de Destino', with: 'São Paulo')
     expect(page).to have_field('UF de Destino', with: 'SP')
+    expect(page).to have_field('Distância', with: '25 km')
 
     expect(page).to have_field('Nome do remetente', with: 'Fernando Paulo')
     expect(page).to have_field('CPF do remetente', with: '12345678978')
