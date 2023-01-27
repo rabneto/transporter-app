@@ -36,6 +36,7 @@ class OrdersController < ApplicationController
       @orders = Order.pendent
       flash[:alert] = "Não é possível iniciar uma entrega para esta ordem de entrega. Verifique se a mesma já saiu para entrega ou já foi entregue."
       redirect_to orders_pending_path
+      return
     end
 
     transport_mode = TransportMode.find(params[:tm])
@@ -45,8 +46,14 @@ class OrdersController < ApplicationController
     #puts "modalidade de transporte: #{transport_mode.name}"
     #puts "taxa: #{transport_mode.tax}"
     #puts "preço por km: #{price.km_price}"
-    #puts  "placa: #{vehicle.plate}"
+    #puts  "veículo indisponível? #{vehicle.nil?}"
     #puts " "
+
+    if vehicle.nil?
+      flash[:alert] = "Não é possível iniciar uma entrega para esta ordem. Nenhum veículo desta modalidade está disponível."
+      redirect_to order_pending_path(@order)
+      return
+    end
     
     deadline = Deadline.find(params[:d])
 
@@ -65,7 +72,7 @@ class OrdersController < ApplicationController
     if sucess
       @order.in_delivery!
       vehicle.in_delivery!
-      flash[:notice] = "Ordem de Entrega atualizada com sucesso."
+      flash[:notice] = "Ordem de Entrega iniciada com sucesso."
       redirect_to @order
     else
       flash.now[:alert] = "Não foi possível atualizar a ordem de serviço."
@@ -88,7 +95,12 @@ class OrdersController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    if !@order.pendent?
+      flash[:alert] = "Não é possível editar esta ordem de entrega. Verifique se a mesma já saiu para entrega ou já foi entregue."
+      redirect_to order_path
+    end
+  end
 
   def update
     

@@ -38,7 +38,7 @@ describe 'usuário edita um prazo' do
                           max_weight: 10,
                           tax: 200)
 
-    tm = TransportMode.create!(name: 'Express',
+    tm = TransportMode.create!(name: 'Expresso',
                                min_range: 100,
                                max_range: 300,
                                min_weight: 5,
@@ -53,7 +53,7 @@ describe 'usuário edita um prazo' do
     end
     click_link '24 horas'
 
-    select 'Express', from: 'Modalidade de Transporte'
+    select 'Expresso', from: 'Modalidade de Transporte'
     fill_in 'Distância mínima', with: '120'
     fill_in 'Distância máxima', with: '220'
     fill_in 'Prazo', with: '48'

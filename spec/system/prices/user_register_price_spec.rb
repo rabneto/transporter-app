@@ -31,7 +31,7 @@ describe 'usuário Cadastra um preço' do
                           max_weight: 10,
                           tax: 200)
 
-    TransportMode.create!(name: 'Express',
+    TransportMode.create!(name: 'Expresso',
                           min_range: 100,
                           max_range: 300,
                           min_weight: 5,
@@ -44,7 +44,7 @@ describe 'usuário Cadastra um preço' do
     end
     click_link 'Cadastrar Novo'
 
-    select 'Express', from: 'Modalidade de Transporte'
+    select 'Expresso', from: 'Modalidade de Transporte'
     fill_in 'Peso mínimo', with: '10'
     fill_in 'Peso máximo', with: '50'
     fill_in 'Preço por km', with: '80,00'
@@ -67,7 +67,7 @@ describe 'usuário Cadastra um preço' do
       max_weight: 10,
       tax: 200)
 
-    TransportMode.create!(name: 'Express',
+    TransportMode.create!(name: 'Expresso',
       min_range: 100,
       max_range: 300,
       min_weight: 5,
@@ -111,7 +111,7 @@ describe 'usuário Cadastra um preço' do
                           max_weight: 10,
                           tax: 200)
 
-    TransportMode.create!(name: 'Express',
+    TransportMode.create!(name: 'Expresso',
                           min_range: 100,
                           max_range: 300,
                           min_weight: 5,
@@ -124,7 +124,7 @@ describe 'usuário Cadastra um preço' do
     end
     click_link 'Cadastrar Novo'
 
-    select 'Express', from: 'Modalidade de Transporte'
+    select 'Expresso', from: 'Modalidade de Transporte'
     fill_in 'Peso mínimo', with: '1'
     fill_in 'Peso máximo', with: '40'
     fill_in 'Preço por km', with: '80,00'
@@ -152,7 +152,7 @@ describe 'usuário Cadastra um preço' do
                           max_weight: 10,
                           tax: 200)
 
-    TransportMode.create!(name: 'Express',
+    TransportMode.create!(name: 'Expresso',
                           min_range: 100,
                           max_range: 300,
                           min_weight: 5,
@@ -165,7 +165,7 @@ describe 'usuário Cadastra um preço' do
     end
     click_link 'Cadastrar Novo'
 
-    select 'Express', from: 'Modalidade de Transporte'
+    select 'Expresso', from: 'Modalidade de Transporte'
     fill_in 'Peso mínimo', with: '10'
     fill_in 'Peso máximo', with: '100'
     fill_in 'Preço por km', with: '80,00'

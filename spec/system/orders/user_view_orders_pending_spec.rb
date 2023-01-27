@@ -224,13 +224,87 @@ describe 'usuário vê orçamentos pendentes' do
 
     click_on "Iniciar Entrega"
 
-    expect(current_path).to eq order_path(o.id)
+    expect(current_path).to eq order_path(o)
 
     expect(page).to have_field('Código', with: 'AS4D7FDR7R5R54T')
     expect(page).to have_field('Situação', with: 'Saiu para entrega')
     expect(page).to have_field('Modalidade', with: 'Expressa')
     expect(page).to have_field('Veículo', with: 'GTY-7532')
 
+  end
+
+  it 'e não inicia a entrega se não houver veículos disponíveis' do
+
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
+
+    allow(SecureRandom).to receive(:alphanumeric).with(15).and_return('AS4D7FDR7R5R54T')
+
+    tm = TransportMode.create!(name: 'Expressa',
+                               min_range: 1,
+                               max_range: 20,
+                               min_weight: 1,
+                               max_weight: 20,
+                               tax: 20)
+
+    Price.create!(min_weight: 1, max_weight: 20, km_price: 0.5, transport_mode: tm)
+    Deadline.create!(min_range: 1, max_range: 20, hours: 6, transport_mode: tm)
+
+    c = Category.create!(name: 'Moto')
+
+    v = Vehicle.create!(category: c,
+                    plate: 'GTY-7532',
+                    brand: 'Honda',
+                    model: 'Pop',
+                    year: 2018,
+                    max_weight: 20)
+
+    v.disable!
+
+    o = Order.create!(start: '',
+                      deadline: '',
+                      delivered: '',
+                      delay_reason: '',
+                      distance: 10,
+                      product_id: 'tv 41 polegadas',
+                      product_width: 120,
+                      product_height: 80,
+                      product_depth: 20,
+                      product_weight: 5,
+                      origin_address: 'Avenida B, 123',
+                      origin_city: 'Guarulhos',
+                      origin_uf: 'SP',
+                      destiny_address: 'Av. Paulisa, 234 - Sala 605',
+                      destiny_city: 'São Paulo',
+                      destiny_uf: 'SP',
+                      sender_name: 'Fernando Paulo',
+                      sender_document: '12345678978',
+                      sender_phone: '(11) 99877-4455',
+                      sender_email: '',
+                      recipient_name: 'João Guilhermo',
+                      recipient_document: '78945678945',
+                      recipient_email: '',
+                      recipient_phone: '(11) 98865-7854',
+                      transport_mode_id: nil,
+                      vehicle_id: nil,
+                      price: '',
+                      status: 1)
+
+    visit root_path
+    within('#sidebar') do
+      click_on 'Orçamentos'
+    end
+
+    click_on 'AS4D7FDR7R5R54T'
+
+    click_on "Iniciar Entrega"
+
+    expect(current_path).to eq order_pending_path(o)
+
+    within('div#alert') do
+      expect(page).to have_content 'Não é possível iniciar uma entrega para esta ordem. Nenhum veículo desta modalidade está disponível.'
+    end
+    
   end
 
   it 'e não existem orçamentos pendentes' do
