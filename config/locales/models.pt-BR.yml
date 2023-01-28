@@ -68,5 +68,7 @@ pt-BR:
         recipient_phone: "Telefone do destinatário"
         transport_mode_id: "Modalidade de Transporte"
         vehicle_id: "Veículo"
+        tax: "Taxa fixa"
+        km_price: "Preço por km"
         price: "Valor"
         status: "Situação"

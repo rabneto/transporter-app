@@ -21,15 +21,12 @@ Rails.application.routes.draw do
   resources :prices, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :deadlines, only: [:index, :new, :create, :edit, :update, :destroy]
 
-  resources :orders, only: [:index, :show, :new, :create, :edit, :update] do
-    patch :in_delivery, on: :member
-    patch :delivered, on: :member
-  end
+  resources :orders, only: [:index, :show, :new, :create, :edit, :update] 
 
   get "/pending/:id", to: 'orders#show_pending', as: 'order_pending'
   get "/pending", to: 'orders#pending', as: 'orders_pending'
 
   get "/in_delivery/:id/tm/:tm/p/:p/d/:d", to: 'orders#change_to_in_delivery'
-
+  get "/delivered/:id", to: 'orders#change_to_delivered', as: 'order_finish'
 
 end

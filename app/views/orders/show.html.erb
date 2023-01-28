@@ -4,7 +4,7 @@
 
 <div class="row mx-0">
 
-    <%= form_with model: @order do |o| %>
+    <%= form_with model: @order, url: order_finish_path, method: :get do |o| %>
 
     <div class="col-xs-12 col-md-6">
 
@@ -153,14 +153,32 @@
                         <%= o.label :price, class: "form-label" %>
                         <%= o.text_field :price, value: number_to_currency(@order.price, unit: "R$", separator: ",", delimiter: ""), class: "form-control", readonly: true %>
                     </div>
-                    <% if !@order.delivered.nil?
-                         if @order.delivered > @order.deadline %>
+                    <div class="col-sm-12 col-md-4 pb-3">
+                        <%= o.label :tax, class: "form-label" %>
+                        <%= o.text_field :tax, value: number_to_currency(@order.tax, unit: "R$", separator: ",", delimiter: ""), class: "form-control", readonly: true %>
+                    </div>
+                    <div class="col-sm-12 col-md-4 pb-3">
+                        <%= o.label :km_price, class: "form-label" %>
+                        <%= o.text_field :km_price, value: number_to_currency(@order.km_price, unit: "R$", separator: ",", delimiter: ""), class: "form-control", readonly: true %>
+                    </div>
+                    <% if !@order.delivered.nil? %>
                     <div class="col-sm-12 col-md-12 pb-3">
                         <%= o.label :delay_reason, class: "form-label" %>
                         <%= o.text_field :delay_reason, class: "form-control", readonly: true %>
                     </div>
-                    <%   end
+                    <% else %>
+                    <% if @order.deadline < DateTime.now() %>
+                    <div class="col-sm-12 col-md-12 pb-3">
+                        <%= o.label :delay_reason, class: "form-label" %>
+                        <%= o.text_field :delay_reason, class: "form-control", required: true %>
+                    </div>
+                    <% end
                        end %>
+                    <% if @order.status == "in_delivery" %>
+                    <div class="col-sm-12 col-md-12 pb-3">
+                        <%= o.submit "Finalizar Ordem de Entrega", class: "btn btn-primary btn-lg" %>
+                    </div>
+                    <% end %>
                 </div>
             </div>
         </div>

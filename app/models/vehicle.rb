@@ -7,6 +7,10 @@ class Vehicle < ApplicationRecord
     where("max_weight >= ? AND max_weight <= ?", min_weight, max_weight)
   }
 
+  scope :limit_weight, ->(weight) {
+    where("max_weight >= ?", weight)
+  }
+
   scope :active, -> { where(status: enable) }
   
 end

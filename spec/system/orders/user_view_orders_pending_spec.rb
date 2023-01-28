@@ -302,7 +302,7 @@ describe 'usuário vê orçamentos pendentes' do
     expect(current_path).to eq order_pending_path(o)
 
     within('div#alert') do
-      expect(page).to have_content 'Não é possível iniciar uma entrega para esta ordem. Nenhum veículo desta modalidade está disponível.'
+      expect(page).to have_content 'Não é possível iniciar esta ordem de entrega. Nenhum veículo desta modalidade está disponível.'
     end
     
   end

@@ -34,6 +34,8 @@ describe 'usuário vê detalhes do orçamento de uma ordem de serviço pendente'
                       recipient_phone: '(11) 98865-7854',
                       transport_mode_id: nil,
                       vehicle_id: nil,
+                      tax: '',
+                      km_price: '',
                       price: '',
                       status: 1)
 
@@ -118,6 +120,8 @@ describe 'usuário vê detalhes do orçamento de uma ordem de serviço pendente'
       max_weight: 15,
       tax: 200)
 
+    Price.create!(min_weight: 1, max_weight: 10, km_price: 2, transport_mode: tm)
+
     c = Category.create!(name: 'Moto')
 
     v = Vehicle.create!(category: c,
@@ -136,7 +140,7 @@ describe 'usuário vê detalhes do orçamento de uma ordem de serviço pendente'
                       product_width: 120,
                       product_height: 80,
                       product_depth: 20,
-                      product_weight: 3000,
+                      product_weight: 5,
                       origin_address: 'Avenida B, 123',
                       origin_city: 'Guarulhos',
                       origin_uf: 'SP',
@@ -153,7 +157,9 @@ describe 'usuário vê detalhes do orçamento de uma ordem de serviço pendente'
                       recipient_phone: '(11) 98865-7854',
                       transport_mode_id: 1,
                       vehicle_id: v,
-                      price: 150,
+                      tax: 200,
+                      km_price: 2,
+                      price: 250,
                       status: 3)
 
     visit order_pending_path(o.id)
@@ -199,6 +205,8 @@ describe 'usuário vê detalhes do orçamento de uma ordem de serviço pendente'
                       recipient_phone: '(11) 98865-7854',
                       transport_mode_id: nil,
                       vehicle_id: nil,
+                      tax: '',
+                      km_price: '',
                       price: '',
                       status: 1)
 

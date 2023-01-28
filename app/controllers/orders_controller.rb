@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 
-  before_action :set_order, only: [:edit, :update, :show_pending, :change_to_in_delivery]
+  before_action :set_order, only: [:edit, :update, :show_pending, :change_to_in_delivery, :change_to_delivered]
 
   def index
     if(params[:q]).present?
@@ -33,15 +33,14 @@ class OrdersController < ApplicationController
   def change_to_in_delivery #######################################################################################################
     
     if !@order.pendent?
-      @orders = Order.pendent
-      flash[:alert] = "Não é possível iniciar uma entrega para esta ordem de entrega. Verifique se a mesma já saiu para entrega ou já foi entregue."
+      flash[:alert] = "Não é possível iniciar esta ordem de entrega. Verifique se a mesma já saiu para entrega ou já foi entregue."
       redirect_to orders_pending_path
       return
     end
 
     transport_mode = TransportMode.find(params[:tm])
     price = Price.find(params[:p])
-    vehicle = Vehicle.weight_between(transport_mode.min_weight, transport_mode.max_weight).enable.first
+    vehicle = Vehicle.limit_weight(@order.product_weight).enable.first
     #puts " "
     #puts "modalidade de transporte: #{transport_mode.name}"
     #puts "taxa: #{transport_mode.tax}"
@@ -50,7 +49,7 @@ class OrdersController < ApplicationController
     #puts " "
 
     if vehicle.nil?
-      flash[:alert] = "Não é possível iniciar uma entrega para esta ordem. Nenhum veículo desta modalidade está disponível."
+      flash[:alert] = "Não é possível iniciar esta ordem de entrega. Nenhum veículo desta modalidade está disponível."
       redirect_to order_pending_path(@order)
       return
     end
@@ -73,10 +72,46 @@ class OrdersController < ApplicationController
       @order.in_delivery!
       vehicle.in_delivery!
       flash[:notice] = "Ordem de Entrega iniciada com sucesso."
-      redirect_to @order
     else
-      flash.now[:alert] = "Não foi possível atualizar a ordem de serviço."
+      flash[:alert] = "Não foi possível iniciar a ordem de entrega."
     end
+
+    redirect_to @order
+
+  end #######################################################################################################
+
+  def change_to_delivered #######################################################################################################
+    
+    if !@order.in_delivery?
+      flash[:alert] = "Não é possível finalizar esta ordem de entrega. Verifique se a mesma está pendente ou já foi entregue."
+      redirect_to orders_path
+      return
+    end
+    
+    if @order.deadline < DateTime.now()
+      if(params[:order][:delay_reason]).empty?
+        flash[:alert] = "Informe o motivo do atraso na entrega, para finalizar a mesma."
+        redirect_to @order
+        return
+      end
+    end
+
+    vehicle = Vehicle.find(@order.vehicle_id)
+
+    @order.delivered = DateTime.now()
+    @order.delay_reason = params[:order][:delay_reason]
+
+    sucess = @order.save
+
+    if sucess
+      @order.delivered!
+      vehicle.enable!
+      flash[:notice] = "Ordem de Entrega finalizada com sucesso."
+    else
+      flash[:alert] = "Não foi possível finalizar a ordem de entrega."
+    end
+
+    redirect_to @order
 
   end #######################################################################################################
 

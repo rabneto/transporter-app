@@ -116,7 +116,7 @@ describe 'usuário vê ordens de entrega' do
                       product_width: 150,
                       product_height: 250,
                       product_depth: 120,
-                      product_weight: 30000,
+                      product_weight: 30_000,
                       origin_address: 'Avenida B, 123',
                       origin_city: 'Guarulhos',
                       origin_uf: 'SP',
@@ -140,8 +140,8 @@ describe 'usuário vê ordens de entrega' do
     within('#sidebar') do
       click_on 'Ordens de Entrega'
     end
-    
-    search_field= find_by_id('q')
+
+    search_field = find_by_id('q')
     search_field.set('AS4D7FDR7R5R54T')
     click_on 'Pesquisar'
 
@@ -155,4 +155,5 @@ describe 'usuário vê ordens de entrega' do
       expect(page).not_to have_content 'Marcelo Vieira Pereira'
     end
   end
+
 end

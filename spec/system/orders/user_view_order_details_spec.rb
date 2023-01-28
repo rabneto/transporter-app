@@ -229,5 +229,286 @@ describe 'usuário vêm detalhes de uma ordem de entrega' do
 
   end
 
+  it 'e mostra a opção de finalizar entrega se o status for: saiu para entrega' do
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
+
+    allow(SecureRandom).to receive(:alphanumeric).with(15).and_return('XYZ23FGTR56YU99')
+
+    tm = TransportMode.create!(name: 'Express',
+                               min_range: 1,
+                               max_range: 30,
+                               min_weight: 1,
+                               max_weight: 15,
+                               tax: 200)
+
+    Price.create!(min_weight: 1, max_weight: 10, km_price: 2, transport_mode: tm)
+
+    c = Category.create!(name: 'Moto')
+
+    v = Vehicle.create!(category: c,
+                        plate: 'GTY-7532',
+                        brand: 'Honda',
+                        model: 'Pop',
+                        year: 2018,
+                        max_weight: 10)
+
+    o = Order.create!(start: '2023-01-21 8:00:00',
+                      deadline: '2023-01-21 16:00:00',
+                      delivered: '',
+                      delay_reason: '',
+                      distance: 25,
+                      product_id: 'tv 41 polegadas',
+                      product_width: 120,
+                      product_height: 80,
+                      product_depth: 20,
+                      product_weight: 5,
+                      origin_address: 'Avenida B, 123',
+                      origin_city: 'Guarulhos',
+                      origin_uf: 'SP',
+                      destiny_address: 'Av. Paulisa, 234 - Sala 605',
+                      destiny_city: 'São Paulo',
+                      destiny_uf: 'SP',
+                      sender_name: 'João Pessoa',
+                      sender_document: '12345678978',
+                      sender_phone: '(11) 99877-4455',
+                      sender_email: '',
+                      recipient_name: 'Guilhermo Urquiola',
+                      recipient_document: '78945678945',
+                      recipient_email: '',
+                      recipient_phone: '(11) 98865-7854',
+                      transport_mode_id: tm,
+                      vehicle_id: v,
+                      tax: 200,
+                      km_price: 2,
+                      price: 250,
+                      status: 2)
+
+    visit root_path
+    within('#sidebar') do
+      click_on 'Ordens de Entrega'
+    end
+
+    click_on 'XYZ23FGTR56YU99'
+
+    expect(page).to have_button('Finalizar Ordem de Entrega')
+  end
+
+  it 'e finaliza a ordem de entrega' do
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
+
+    allow(SecureRandom).to receive(:alphanumeric).with(15).and_return('XYZ23FGTR56YU99')
+
+    tm = TransportMode.create!(name: 'Express',
+                               min_range: 1,
+                               max_range: 30,
+                               min_weight: 1,
+                               max_weight: 15,
+                               tax: 200)
+
+    Price.create!(min_weight: 1, max_weight: 10, km_price: 2, transport_mode: tm)
+    Deadline.create!(min_range: 1, max_range: 30, hours: 12, transport_mode: tm)
+
+    c = Category.create!(name: 'Moto')
+
+    v = Vehicle.create!(category: c,
+                        plate: 'GTY-7532',
+                        brand: 'Honda',
+                        model: 'Pop',
+                        year: 2018,
+                        max_weight: 10)
+
+    o = Order.create!(start: DateTime.now - 11,
+                      deadline: DateTime.now+1,
+                      delivered: DateTime.now,
+                      delay_reason: '',
+                      distance: 25,
+                      product_id: 'tv 41 polegadas',
+                      product_width: 120,
+                      product_height: 80,
+                      product_depth: 20,
+                      product_weight: 5,
+                      origin_address: 'Avenida B, 123',
+                      origin_city: 'Guarulhos',
+                      origin_uf: 'SP',
+                      destiny_address: 'Av. Paulisa, 234 - Sala 605',
+                      destiny_city: 'São Paulo',
+                      destiny_uf: 'SP',
+                      sender_name: 'João Pessoa',
+                      sender_document: '12345678978',
+                      sender_phone: '(11) 99877-4455',
+                      sender_email: '',
+                      recipient_name: 'Guilhermo Urquiola',
+                      recipient_document: '78945678945',
+                      recipient_email: '',
+                      recipient_phone: '(11) 98865-7854',
+                      transport_mode_id: tm.id,
+                      vehicle_id: v.id,
+                      tax: 200,
+                      km_price: 2,
+                      price: 250,
+                      status: 2)
+
+    visit root_path
+    within('#sidebar') do
+      click_on 'Ordens de Entrega'
+    end
+
+    click_on 'XYZ23FGTR56YU99'
+    
+    click_on 'Finalizar Ordem de Entrega'
+
+    within('div#notice') do
+      expect(page).to have_content 'Ordem de Entrega finalizada com sucesso.'
+    end
+  end
+
+  it 'e não finaliza se estiver atrasado e sem um motivo' do
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
+
+    allow(SecureRandom).to receive(:alphanumeric).with(15).and_return('XYZ23FGTR56YU99')
+
+    tm = TransportMode.create!(name: 'Express',
+                               min_range: 1,
+                               max_range: 30,
+                               min_weight: 1,
+                               max_weight: 15,
+                               tax: 200)
+
+    Price.create!(min_weight: 1, max_weight: 10, km_price: 2, transport_mode: tm)
+    Deadline.create!(min_range: 1, max_range: 30, hours: 12, transport_mode: tm)
+
+    c = Category.create!(name: 'Moto')
+
+    v = Vehicle.create!(category: c,
+                        plate: 'GTY-7532',
+                        brand: 'Honda',
+                        model: 'Pop',
+                        year: 2018,
+                        max_weight: 10)
+
+    o = Order.create!(start: DateTime.now - 13,
+                      deadline: DateTime.now-1,
+                      delivered: '',
+                      delay_reason: '',
+                      distance: 25,
+                      product_id: 'tv 41 polegadas',
+                      product_width: 120,
+                      product_height: 80,
+                      product_depth: 20,
+                      product_weight: 5,
+                      origin_address: 'Avenida B, 123',
+                      origin_city: 'Guarulhos',
+                      origin_uf: 'SP',
+                      destiny_address: 'Av. Paulisa, 234 - Sala 605',
+                      destiny_city: 'São Paulo',
+                      destiny_uf: 'SP',
+                      sender_name: 'João Pessoa',
+                      sender_document: '12345678978',
+                      sender_phone: '(11) 99877-4455',
+                      sender_email: '',
+                      recipient_name: 'Guilhermo Urquiola',
+                      recipient_document: '78945678945',
+                      recipient_email: '',
+                      recipient_phone: '(11) 98865-7854',
+                      transport_mode_id: tm.id,
+                      vehicle_id: v.id,
+                      tax: 200,
+                      km_price: 2,
+                      price: 250,
+                      status: 2)
+
+    visit root_path
+    within('#sidebar') do
+      click_on 'Ordens de Entrega'
+    end
+
+    click_on 'XYZ23FGTR56YU99'
+
+    reason_field = find_by_id('order_delay_reason')
+    reason_field.set('')
+    
+    click_on 'Finalizar Ordem de Entrega'
+
+    within('div#alert') do
+      expect(page).to have_content 'Informe o motivo do atraso na entrega, para finalizar a mesma.'
+    end
+  end
+
+  it 'e finaliza uma ordem de entrega atrasada' do
+    user = User.create!(name: 'Root', email: 'root@gmail.com', password: '123456')
+    login_as(user)
+
+    allow(SecureRandom).to receive(:alphanumeric).with(15).and_return('XYZ23FGTR56YU99')
+
+    tm = TransportMode.create!(name: 'Express',
+                               min_range: 1,
+                               max_range: 30,
+                               min_weight: 1,
+                               max_weight: 15,
+                               tax: 200)
+
+    Price.create!(min_weight: 1, max_weight: 10, km_price: 2, transport_mode: tm)
+    Deadline.create!(min_range: 1, max_range: 30, hours: 12, transport_mode: tm)
+
+    c = Category.create!(name: 'Moto')
+
+    v = Vehicle.create!(category: c,
+                        plate: 'GTY-7532',
+                        brand: 'Honda',
+                        model: 'Pop',
+                        year: 2018,
+                        max_weight: 10)
+
+    o = Order.create!(start: DateTime.now - 13,
+                      deadline: DateTime.now-1,
+                      delivered: '',
+                      delay_reason: '',
+                      distance: 25,
+                      product_id: 'tv 41 polegadas',
+                      product_width: 120,
+                      product_height: 80,
+                      product_depth: 20,
+                      product_weight: 5,
+                      origin_address: 'Avenida B, 123',
+                      origin_city: 'Guarulhos',
+                      origin_uf: 'SP',
+                      destiny_address: 'Av. Paulisa, 234 - Sala 605',
+                      destiny_city: 'São Paulo',
+                      destiny_uf: 'SP',
+                      sender_name: 'João Pessoa',
+                      sender_document: '12345678978',
+                      sender_phone: '(11) 99877-4455',
+                      sender_email: '',
+                      recipient_name: 'Guilhermo Urquiola',
+                      recipient_document: '78945678945',
+                      recipient_email: '',
+                      recipient_phone: '(11) 98865-7854',
+                      transport_mode_id: tm.id,
+                      vehicle_id: v.id,
+                      tax: 200,
+                      km_price: 2,
+                      price: 250,
+                      status: 2)
+
+    visit root_path
+    within('#sidebar') do
+      click_on 'Ordens de Entrega'
+    end
+
+    click_on 'XYZ23FGTR56YU99'
+
+    reason_field = find_by_id('order_delay_reason')
+    reason_field.set('Demora ao encontrar o destinatário')
+    
+    click_on 'Finalizar Ordem de Entrega'
+
+    within('div#notice') do
+      expect(page).to have_content 'Ordem de Entrega finalizada com sucesso.'
+    end
+  end
+
 end
 
