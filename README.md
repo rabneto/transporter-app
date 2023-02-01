@@ -1,3 +1,7 @@
+<img src="https://img.shields.io/badge/ruby-3.1.2p20-blue"/>
+<img src="https://img.shields.io/badge/rails-7.0.4-blue"/>
+<img src="https://img.shields.io/badge/tests-155%20passed-green"/>
+
 # Transporter APP
 
 Aplicação desenvolvida em Ruby on Rails, para administração de transportadoras
@@ -16,9 +20,6 @@ Essas instruções permitirão que você obtenha uma cópia do projeto em opera�
 
 * Ruby 3.1.2p20
 * Rails 7.0.4
-* banco Sqlite
-* rspec
-* capybara
 
 ### ⚙️ Executando os testes
 
@@ -38,6 +39,14 @@ Instale as dependências
 
 `bundle install`
 
+Rodar as migtrations
+
+`rails db:migrate`
+
+Importe os dados
+
+`rails db:setup`
+
 Execute a aplicação
 
 `rails server`
@@ -48,12 +57,12 @@ Pronto! Agora você pode rodar a aplicação na sua máquina a partir da rota ht
 
 - [X] CADASTRO DE MODALIDADE DE TRANSPORTE
 - [X] CONSULTA DE MODALIDADE DE TRANSPORTE
-- [ ] CONSULTA DE VEÍCULOS
-- [ ] CADASTRO DE VEÍCULOS
-- [ ] CONFIGURAÇÃO DE PREÇOS POR PESO
-- [ ] CONFIGURAÇÕES DE PRAZO
-- [ ] CRIAR ORDEM DE ENTREGA
-- [ ] CONSULTA DE ORÇAMENTOS
-- [ ] INICIAR ORDEM DE ENTREGA
-- [ ] ENCERRAR ORDEM DE ENTREGA
-- [ ] CONSULTA DE ENTREGA
+- [X] CONSULTA DE VEÍCULOS
+- [X] CADASTRO DE VEÍCULOS
+- [X] CONFIGURAÇÃO DE PREÇOS POR PESO
+- [X] CONFIGURAÇÕES DE PRAZO
+- [X] CRIAR ORDEM DE ENTREGA
+- [X] CONSULTA DE ORÇAMENTOS
+- [X] INICIAR ORDEM DE ENTREGA
+- [X] ENCERRAR ORDEM DE ENTREGA
+- [X] CONSULTA DE ENTREGA

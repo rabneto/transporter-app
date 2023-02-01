@@ -1,5 +1,6 @@
 class TransportModesController < ApplicationController
 
+  before_action :authenticate_user!
   before_action :set_transport_mode, only: [:show, :edit, :update, :active, :desactive]
 
   def index

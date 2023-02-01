@@ -1,0 +1,86 @@
+            <h1 class="text-center"><%= @order.code %></h1>
+            <hr />
+            <div class="timeline-steps aos-init aos-animate" data-aos="fade-up">
+                <div class="timeline-step">
+                    <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2003">
+                        <div id="bt-pendent" class="inner-circle<%= @active_pendent %>"></div>
+                        <p class="h6 text-muted mb-0 mb-lg-0">Postagem</p>
+                    </div>
+                </div>
+                <div class="timeline-step">
+                    <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2004">
+                        <div id="bt-in-delivery" class="inner-circle<%= @active_in_delivery %>"></div>
+                        <p class="h6 text-muted mb-0 mb-lg-0">Saiu para entrega</p>
+                    </div>
+                </div>
+                <div class="timeline-step">
+                    <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2005">
+                        <div id="bt-delivered" class="inner-circle<%= @active_delivered %>"></div>
+                        <p class="h6 text-muted mb-0 mb-lg-0">Entrega</p>
+                    </div>
+                </div>
+            </div>
+
+            <% if @order.status == 'delivered' %>
+            <div class="row card" style="margin-top:50px;">
+              <div class="col-xs-12 col-md-4 infos">
+                <p><%= @order.delivered.to_fs(:extense) %> | <%= "#{@order.destiny_city}/#{@order.destiny_uf}" %></p>
+              </div>
+              <div class="col-xs-12 col-md-8">
+                <h4>Entregue ao destinatário</h4>
+              </div>
+            </div>
+            <% end
+              if @order.status == 'in_delivery' || @order.status == 'delivered' %>
+            <div class="row card" style="margin-top:20px;">
+              <div class="col-xs-12 col-md-4 infos">
+                <p><%= @order.deadline.to_fs(:extense) %></p>
+              </div>
+              <div class="col-xs-12 col-md-8">
+                <h4>Previsão de entrega</h4>
+              </div>
+            </div>
+            <div class="row card" style="margin-top:20px;">
+              <div class="col-xs-12 col-md-4 infos">
+                <p><%= @order.start.to_fs(:extense) %> | <%= "#{@order.origin_city}/#{@order.origin_uf}" %></p>
+              </div>
+              <div class="col-xs-12 col-md-8">
+                <h4>Saiu para entrega</h4>
+              </div>
+            </div>
+            <% end
+              if @order.status >= 'pendent' || @order.status == 'in_delivery' || @order.status == 'delivered' %>
+            <div class="row card" style="margin-top:20px;">
+              <div class="col-xs-12 col-md-4 infos">
+                <p><%= @order.created_at.to_fs(:extense) %> | <%= "#{@order.origin_city}/#{@order.origin_uf}" %></p>
+              </div>
+              <div class="col-xs-12 col-md-8">
+                <h4>Ordem de entrega aberta</h4>
+              </div>
+            </div>
+            <% end %>
+            <div class="row card" style="margin-top:20px;">
+              <div class="col-xs-12 col-md-4 infos">
+                <p>Endereço de saída</p>
+              </div>
+              <div class="col-xs-12 col-md-8">
+                <p><%= "#{@order.origin_address}. #{@order.origin_city}/#{@order.origin_uf}" %></p>
+              </div>
+              <div class="col-xs-12 col-md-4 infos">
+                <p>Endereço de entrega</p>
+              </div>
+              <div class="col-xs-12 col-md-8">
+                <p><%= "#{@order.destiny_address}. #{@order.destiny_city}/#{@order.destiny_uf}" %></p>
+              </div>
+              <% if @order.status == 'in_delivery' || @order.status == 'delivered' %>
+              <div class="col-xs-12 col-md-4 infos">
+                <p>Veículo da entrega</p>
+              </div>
+              <div class="col-xs-12 col-md-8">
+                <p><%= "#{@vehicle.brand} #{@vehicle.model} #{@vehicle.plate}" %></p>
+              </div>
+              <% end %>
+            </div>
+            <div class="text-right" style="margin-top:20px;">
+              <%= link_to "Voltar", search_path, class: "btn btn-default btn-lg" %>
+            </div>

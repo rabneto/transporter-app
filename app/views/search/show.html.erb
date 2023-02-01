@@ -1,0 +1,12 @@
+<div class="row" style="padding-top: 100px;">
+  <h3>Rastrear Entregas</h1>
+  <p>Deseja acompanhar sua encomenda?</p>
+  <p>Digite seu CPF/CNPJ ou código de rastreamento.</p>
+  <%= form_with url: result_path, class: "d-flex", method: :get do %>
+  <div class="form-group first mb-4">
+    <%= text_field_tag :code, nil, class: 'form-control mb-3', required: true %>
+  </div>
+    <%= submit_tag 'Pesquisar', class: "btn btn-primary" %>
+    <%= link_to "Voltar", new_user_session_path, class: "btn btn-default btn-lg" %>
+  <% end %>
+</div>

@@ -1,5 +1,6 @@
 class VehiclesController < ApplicationController
 
+  before_action :authenticate_user!
   before_action :set_vehicle, only: [:edit, :show, :update, :active, :desactive]
 
   def index

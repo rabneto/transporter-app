@@ -29,4 +29,7 @@ Rails.application.routes.draw do
   get "/in_delivery/:id/tm/:tm/p/:p/d/:d", to: 'orders#change_to_in_delivery'
   get "/delivered/:id", to: 'orders#change_to_delivered', as: 'order_finish'
 
+  get "/search", to: 'search#show', as: 'search'
+  get "/result", to: 'search#result', as: 'result'
+
 end

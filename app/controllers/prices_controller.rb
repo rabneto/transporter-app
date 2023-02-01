@@ -1,5 +1,6 @@
 class PricesController < ApplicationController
 
+  before_action :authenticate_user!
   before_action :set_price, only: [:edit, :update, :destroy]
 
   def index

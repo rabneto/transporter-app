@@ -30,9 +30,9 @@ class Order < ApplicationRecord
     self.code = SecureRandom.alphanumeric(15).upcase
   end
 
-  def created_at
-    self.created_at = created_at.strftime("posted on %b, %m %Y - %H:%M")
-  end
+  #def created_at
+  #  self.created_at = created_at.strftime("posted on %b, %m %Y - %H:%M")
+  #end
 
   def pending
     self.created_at = created_at.strftime("posted on %b, %m %Y - %H:%M")
