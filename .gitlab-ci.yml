@@ -18,7 +18,7 @@ setup:
   script: 
     - apt-get update
     - bundle config set --local path 'vendor/ruby'
-    - sudo bin/setup
+    - bin/setup
     - gem install bundler-audit
 
 rspec:
