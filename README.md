@@ -29,7 +29,7 @@ executar o comando `rails generate rspec:install` após o bundle inicial e `rspe
 
 No terminal rode o comando
 
-`git clone https://git-qsd.campuscode.com.br/rabneto/transporter-app.git`
+`git clone https://github.com/rabneto/transporter-app.git`
 
 Entre na pasta do projeto
 
